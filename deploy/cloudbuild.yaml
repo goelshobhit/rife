@@ -1,0 +1,22 @@
+steps:
+  - name: "gcr.io/cloud-builders/yarn"
+    args: ["run", "build"]
+    env: ["NODE_PATH=./src", "GENERATE_SOURCEMAP=true"]
+
+  - name: gcr.io/cloud-builders/gsutil
+    args: ["-m", "rsync", "-r", "build", "gs://social_app_v2/"]
+
+  - name: gcr.io/cloud-builders/gsutil
+    args:
+      [
+        "-m",
+        "web",
+        "set",
+        "-m",
+        "index.html",
+        "-e",
+        "index.html",
+        "gs://social_app_v2/",
+      ]
+
+timeout: "600s"
