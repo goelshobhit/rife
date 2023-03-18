@@ -1,4 +1,7 @@
 steps:
+  - name: 'gcr.io/cloud-builders/yarn'
+    args: ['install', '--production']
+
   - name: "gcr.io/cloud-builders/yarn"
     args: ["run", "build"]
     env: ["NODE_PATH=./src", "GENERATE_SOURCEMAP=true"]
@@ -20,3 +23,4 @@ steps:
       ]
 
 timeout: "600s"
+
