@@ -1,4 +1,4 @@
-## steps to update the GCP storage bucket social_app_v2 with latest build
+## steps to update the GCP storage bucket social_app_v2_dev with latest build
 steps:
   - name: 'gcr.io/cloud-builders/yarn'
     args: ['install'] #installing dependencies
