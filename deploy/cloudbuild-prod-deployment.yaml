@@ -23,5 +23,14 @@ steps:
         "gs://social_app_v2/",
       ]
 
+  - name: gcr.io/cloud-builders/gsutil
+    args:
+      [
+        'setmeta',
+        '-h',
+        'Cache-Control:no-cache',
+        'gs://social_app_v2/index.html',
+      ]
+
 timeout: "600s"
 
