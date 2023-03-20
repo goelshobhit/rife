@@ -73,7 +73,7 @@ export function Features() {
               complete modularity. Ship only the styles that are on the page for
               the best performance. Generate application-wide styles and themes
               for your components. Change the theme below to see how easy and
-              intuitive theming can ever be!
+              intuitive theming can ever be !!
             </P>
             <ThemeSwitch />
           </Content>
@@ -125,7 +125,7 @@ export function Features() {
         <Feature>
           <SEOIcon className="feature-icon" />
           <Content>
-            <SubTitle>SEO</SubTitle>
+            <SubTitle>SEO Engine</SubTitle>
             <P>
               Supports SEO (document head tags management) for search engines
               that support indexing of JavaScript content.
