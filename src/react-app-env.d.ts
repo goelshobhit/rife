@@ -1,4 +1,3 @@
 /// <reference types="react-scripts" />
-
-// To solve the issue: https://github.com/DefinitelyTyped/DefinitelyTyped/issues/31245
-/// <reference types="styled-components/cssprop" />
+declare module 'deck.gl';
+declare module 'rehype-highlight';

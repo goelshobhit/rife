@@ -1,66 +1,84 @@
-/**
- * index.tsx
- *
- * This is the entry file for the application, only setup and boilerplate
- * code.
- */
-
-import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
-
-import * as React from 'react';
-import * as ReactDOMClient from 'react-dom/client';
-import { Provider } from 'react-redux';
-import FontFaceObserver from 'fontfaceobserver';
-
-// Use consistent styling
-import 'sanitize.css/sanitize.css';
-
-import { App } from 'app';
-
-import { HelmetProvider } from 'react-helmet-async';
-
-import { configureAppStore } from 'store/configureStore';
-
-import { ThemeProvider } from 'styles/theme/ThemeProvider';
-
-import reportWebVitals from 'reportWebVitals';
-
-// Initialize languages
+// i18n
 import './locales/i18n';
 
-// Observe loading of Inter (to remove 'Inter', remove the <link> tag in
-// the index.html file and this observer)
-const openSansObserver = new FontFaceObserver('Inter', {});
+// highlight
+import './utils/highlight';
 
-// When Inter is loaded, add a font-family using Inter to the body
-openSansObserver.load().then(() => {
-  document.body.classList.add('fontLoaded');
-});
+// scroll bar
+import 'simplebar/src/simplebar.css';
 
-const store = configureAppStore();
-const MOUNT_NODE = document.getElementById('root') as HTMLElement;
+// map
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-ReactDOMClient.createRoot(MOUNT_NODE!).render(
-  <Provider store={store}>
-    <ThemeProvider>
-      <HelmetProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
-      </HelmetProvider>
-    </ThemeProvider>
-  </Provider>,
+// lightbox
+import 'react-image-lightbox/style.css';
+
+// editor
+import 'react-quill/dist/quill.snow.css';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
+// slick-carousel
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+// lazy image
+import 'lazysizes';
+import 'lazysizes/plugins/attrchange/ls.attrchange';
+import 'lazysizes/plugins/object-fit/ls.object-fit';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
+
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import { Provider as ReduxProvider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+// material
+import AdapterDateFns from '@material-ui/lab/AdapterDateFns';
+import LocalizationProvider from '@material-ui/lab/LocalizationProvider';
+// redux
+import { store, persistor } from './redux/store';
+// contexts
+import { SettingsProvider } from './contexts/SettingsContext';
+import { CollapseDrawerProvider } from './contexts/CollapseDrawerContext';
+// components
+import LoadingScreen from './components/LoadingScreen';
+
+// Check our docs
+// https://docs-minimals.vercel.app/authentication/ts-version
+
+import { AuthProvider } from './contexts/JWTContext';
+// import { AuthProvider } from './contexts/AwsCognitoContext';
+// import { AuthProvider } from './contexts/Auth0Context';
+// import { AuthProvider } from './contexts/FirebaseContext';
+
+//
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+
+// ----------------------------------------------------------------------
+
+ReactDOM.render(
+  <HelmetProvider>
+    <ReduxProvider store={store}>
+      <PersistGate loading={<LoadingScreen />} persistor={persistor}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <SettingsProvider>
+            <CollapseDrawerProvider>
+              <BrowserRouter>
+                <AuthProvider>
+                  <App />
+                </AuthProvider>
+              </BrowserRouter>
+            </CollapseDrawerProvider>
+          </SettingsProvider>
+        </LocalizationProvider>
+      </PersistGate>
+    </ReduxProvider>
+  </HelmetProvider>,
+  document.getElementById('root')
 );
 
-// Hot reloadable translation json files
-if (module.hot) {
-  module.hot.accept(['./locales/i18n'], () => {
-    // No need to render the App again because i18next works with the hooks
-  });
-}
-
 // If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
+// to log results (for example: reportWebVitals(// console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
