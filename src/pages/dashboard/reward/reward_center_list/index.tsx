@@ -16,12 +16,7 @@ import {
   Card
 } from '@material-ui/core';
 import { isEmpty } from 'lodash';
-import {
-  useGridSlotComponentProps,
-  DataGrid,
-  GridColDef,
-  GridToolbar
-} from '@material-ui/data-grid';
+import { DataGrid, GridColDef, GridToolbar } from '@material-ui/data-grid';
 // utils
 
 // lodash
@@ -38,12 +33,6 @@ import Label from '../../../../components/Label';
 import getVariant from '../../../components-overview/extra/animate/getVariant';
 
 import WithMaterialUIRewardSettingForm from './form';
-
-const TextCellWrapperLink = styled(Typography)(() => ({
-  fontSize: 14,
-  color: '#00BAEF',
-  textDecoration: 'underline'
-}));
 
 const BrandRowWrapper = styled('div')(() => ({
   paddingBottom: 48,
@@ -219,7 +208,6 @@ export default function RewardCenterList() {
       headerName: 'State',
       width: 200,
       renderCell: (params) => {
-        const getStatus = params.row.state;
         return (
           <Label
             color={renderColorStatusCode(params.row.stateColor)}
@@ -233,8 +221,6 @@ export default function RewardCenterList() {
   ];
 
   const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
     return (
       <Pagination
         color="primary"

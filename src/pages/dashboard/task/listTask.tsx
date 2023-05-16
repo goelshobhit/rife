@@ -10,7 +10,6 @@ import {
   DataGrid,
   GridColDef,
   GridToolbar,
-  useGridSlotComponentProps,
   GridFilterInputValueProps
 } from '@material-ui/data-grid';
 // utils
@@ -36,7 +35,6 @@ export default function TaskBrand() {
   }, [dispatch]);
 
   const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
     return (
       <Pagination
         color="primary"
@@ -161,8 +159,8 @@ export default function TaskBrand() {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width:'100%',
-    marginBottom: 40,
+    width: '100%',
+    marginBottom: 40
   }));
 
   const ButtonStyle = styled(Button)(({ theme }) => ({
@@ -171,7 +169,7 @@ export default function TaskBrand() {
     padding: '6px 16px 6px 16px',
     color: '#fff',
     '&:hover': {
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: theme.palette.primary.main
     }
   }));
 
@@ -179,7 +177,7 @@ export default function TaskBrand() {
     <>
       <RowStyle>
         <Typography variant="h4">Task List</Typography>
-        <ButtonStyle  href="/dashboard/task/create">+ New Task</ButtonStyle>
+        <ButtonStyle href="/dashboard/task/create">+ New Task</ButtonStyle>
       </RowStyle>
       <DataGrid
         rows={renderRows()}

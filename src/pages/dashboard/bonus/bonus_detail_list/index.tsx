@@ -36,7 +36,8 @@ export default function RewardList() {
 
   useEffect(() => {
     dispatch(getRewardSettingList({ bonusPageNo: 1 }));
-  }, []);
+  }, [dispatch]);
+
   useEffect(() => {
     if (hasMoreBrands) {
       dispatch(getAllBrands({ brandPageNo: page }));

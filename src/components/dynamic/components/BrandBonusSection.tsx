@@ -5,7 +5,7 @@ import map from 'lodash/map';
 
 // redux
 import { useDispatch, useSelector } from '../../../redux/store';
-import { getSelectedBrandBonus, getBonusSet } from '../../../redux/slices/tasks';
+import { getBonusSet } from '../../../redux/slices/tasks';
 
 // @types
 import { taskBrandsState } from '../../../@types/task';

@@ -17,43 +17,15 @@ interface FormValues {
 
 // ----------------------------------------------------------------------
 
-const TAGS_OPTION = [
-  'Toy Story 3',
-  'Logan',
-  'Full Metal Jacket',
-  'Dangal',
-  'The Sting',
-  '2001: A Space Odyssey',
-  "Singin' in the Rain",
-  'Toy Story',
-  'Bicycle Thieves',
-  'The Kid',
-  'Inglourious Basterds',
-  'Snatch',
-  '3 Idiots'
-];
-
-const LabelStyle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.text.secondary,
-  marginBottom: theme.spacing(1)
-}));
-
 interface Props {
   initialVal: any;
 }
 // ----------------------------------------------------------------------
 
 export default function WithMaterialUIRewardSettingForm({ initialVal }: Props) {
-  const [open, setOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleOpenPreview = () => {
-    setOpen(true);
-  };
-
-  const handleClosePreview = () => {
-    setOpen(false);
-  };
+  const handleClosePreview = () => {};
 
   const RewardSettingSchema = Yup.object().shape({
     booster_value_in_tokens: Yup.string().required('required'),
@@ -85,8 +57,7 @@ export default function WithMaterialUIRewardSettingForm({ initialVal }: Props) {
     }
   });
 
-  const { errors, values, touched, handleSubmit, isSubmitting, setFieldValue, getFieldProps } =
-    formik;
+  const { errors, values, touched, handleSubmit, getFieldProps } = formik;
 
   return (
     <div style={{ marginTop: 14 }}>

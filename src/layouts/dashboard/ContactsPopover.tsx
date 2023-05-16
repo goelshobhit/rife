@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import { useRef, useState, useCallback, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import peopleFill from '@iconify/icons-eva/people-fill';
 // material
 import { alpha } from '@material-ui/core/styles';
@@ -11,9 +11,7 @@ import {
   ListItemAvatar
 } from '@material-ui/core';
 // hooks
-import useIsMountedRef from '../../hooks/useIsMountedRef';
 // utils
-import axios from '../../utils/axios';
 import { fToNow } from '../../utils/formatTime';
 // components
 import Scrollbar from '../../components/Scrollbar';
@@ -28,12 +26,12 @@ const PADDING_ITEM = 2.5;
 
 export default function ContactsPopover() {
   const anchorRef = useRef(null);
-  const isMountedRef = useIsMountedRef();
   const [open, setOpen] = useState(false);
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
     // getContacts();
+    setContacts([]);
   }, []);
 
   const handleOpen = () => {

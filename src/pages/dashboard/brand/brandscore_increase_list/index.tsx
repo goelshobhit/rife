@@ -6,12 +6,7 @@ import get from 'lodash/get';
 // material
 import { Typography, Box, Pagination, Button, Grid, Skeleton, Link } from '@material-ui/core';
 
-import {
-  useGridSlotComponentProps,
-  DataGrid,
-  GridColDef,
-  GridToolbar
-} from '@material-ui/data-grid';
+import { DataGrid, GridColDef, GridToolbar } from '@material-ui/data-grid';
 // utils
 
 // lodash
@@ -136,8 +131,6 @@ export default function BonusList() {
   ];
 
   const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
     return (
       <Pagination
         color="primary"

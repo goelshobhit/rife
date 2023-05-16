@@ -5,8 +5,6 @@ import { Box, BoxProps } from '@material-ui/core';
 // ----------------------------------------------------------------------
 
 export default function Logo({ sx }: BoxProps) {
-  const theme = useTheme();
-
   return (
     <Box sx={{ width: 40, height: 40, ...sx }}>
       <svg

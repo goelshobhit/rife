@@ -44,8 +44,6 @@ const ContentStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Login() {
-  const { method } = useAuth();
-
   return (
     <RootStyle title="Login | Riddim-UI">
       <AuthLayout>

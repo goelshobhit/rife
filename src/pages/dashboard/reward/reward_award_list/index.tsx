@@ -6,12 +6,7 @@ import get from 'lodash/get';
 // material
 import { Typography, Box, Pagination, Button, Grid, Skeleton, Link } from '@material-ui/core';
 
-import {
-  useGridSlotComponentProps,
-  DataGrid,
-  GridColDef,
-  GridToolbar
-} from '@material-ui/data-grid';
+import { DataGrid, GridColDef, GridToolbar } from '@material-ui/data-grid';
 // utils
 
 // lodash
@@ -63,19 +58,19 @@ export default function RewardList() {
     </Grid>
   );
 
-  const mapDataToTargetStructure = (rows: any) =>
-    rows.map((row: any) => ({
-      id: row.bonus_item_id,
-      bonus_item_brand_id: row.bonus_item_brand_id,
-      bonus_item_name: row.bonus_item_name,
-      bonus_item_description: row.bonus_item_description,
-      bonus_item_dollar_value: row.bonus_item_dollar_value,
-      bonus_item_giveaway_type: row.bonus_item_giveaway_type,
-      user_token_value_not_accepting: row.user_token_value_not_accepting,
-      bonus_item_qty: row.bonus_item_qty,
-      bonus_item_remaining_qty: row.bonus_item_remaining_qty,
-      brandName: get(row, 'brand.brand_name')
-    }));
+  // const mapDataToTargetStructure = (rows: any) =>
+  //   rows.map((row: any) => ({
+  //     id: row.bonus_item_id,
+  //     bonus_item_brand_id: row.bonus_item_brand_id,
+  //     bonus_item_name: row.bonus_item_name,
+  //     bonus_item_description: row.bonus_item_description,
+  //     bonus_item_dollar_value: row.bonus_item_dollar_value,
+  //     bonus_item_giveaway_type: row.bonus_item_giveaway_type,
+  //     user_token_value_not_accepting: row.user_token_value_not_accepting,
+  //     bonus_item_qty: row.bonus_item_qty,
+  //     bonus_item_remaining_qty: row.bonus_item_remaining_qty,
+  //     brandName: get(row, 'brand.brand_name')
+  //   }));
 
   const columns: GridColDef[] = [
     {
@@ -135,21 +130,19 @@ export default function RewardList() {
     }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(rewardList, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getRewardList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  // const CustomPagination = () => {
+  //   return (
+  //     <Pagination
+  //       color="primary"
+  //       count={Math.ceil(get(rewardList, 'totalRecords') / 10)}
+  //       page={page}
+  //       onChange={(event, value) => {
+  //         setPageNo(value);
+  //         dispatch(getRewardList({ bonusPageNo: value }));
+  //       }}
+  //     />
+  //   );
+  // };
 
   return (
     <>

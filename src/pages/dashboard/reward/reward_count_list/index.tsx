@@ -5,12 +5,7 @@ import get from 'lodash/get';
 // material
 import { Typography, Box, Pagination, Button, Grid, Skeleton } from '@material-ui/core';
 
-import {
-  useGridSlotComponentProps,
-  DataGrid,
-  GridColDef,
-  GridToolbar
-} from '@material-ui/data-grid';
+import { DataGrid, GridColDef, GridToolbar } from '@material-ui/data-grid';
 // utils
 
 // lodash
@@ -24,12 +19,6 @@ import { rewardState } from '../../../../@types/reward';
 // components
 import { MotionContainer } from '../../../../components/animate';
 import getVariant from '../../../components-overview/extra/animate/getVariant';
-
-const TextCellWrapperLink = styled(Typography)(() => ({
-  fontSize: 14,
-  color: '#00BAEF',
-  textDecoration: 'underline'
-}));
 
 const BrandRowWrapper = styled('div')(() => ({
   paddingBottom: 48,
@@ -88,8 +77,6 @@ export default function RewardCountList() {
   ];
 
   const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
     return (
       <Pagination
         color="primary"

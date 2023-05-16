@@ -134,19 +134,22 @@ export default function RewardNewForm({ rewardBrandList }: Props) {
   const REWARD_TYPE = ['Easter Egg', 'Present', 'Chest', 'Lottery Wheel'];
   const LOCATION_TYPE = ['Default', 'Referral', 'Unassigned'];
 
-  const handleDropAvatar = useCallback((acceptedFiles: any) => {
-    const file = acceptedFiles[0];
-    if (file) {
-      const form = new FormData();
-      form.append(`file`, file, file.name);
-      form.append('media_key', 'reward_center');
-      dispatch(createRewardImage(form));
-      setCenterImage({
-        ...file,
-        preview: URL.createObjectURL(file)
-      });
-    }
-  }, []);
+  const handleDropAvatar = useCallback(
+    (acceptedFiles: any) => {
+      const file = acceptedFiles[0];
+      if (file) {
+        const form = new FormData();
+        form.append(`file`, file, file.name);
+        form.append('media_key', 'reward_center');
+        dispatch(createRewardImage(form));
+        setCenterImage({
+          ...file,
+          preview: URL.createObjectURL(file)
+        });
+      }
+    },
+    [dispatch]
+  );
 
   return (
     <FormikProvider value={formik}>

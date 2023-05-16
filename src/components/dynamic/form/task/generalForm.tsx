@@ -45,11 +45,6 @@ const HeadingStyle = styled(Typography)(() => ({
   paddingBottom: 14
 }));
 
-const EndDateDisabledStyle = styled(TextField)(() => ({
-  transform: 'translate(20px, 38px)',
-  width: '48%'
-}));
-
 type Props = {
   fieldJson: any;
   disabled: boolean;
@@ -83,7 +78,7 @@ const RowStyle = styled('div')(() => ({
   marginTop: 58
 }));
 
-const NextButtonStyle = styled(Button)(({ theme }) => ({
+const NextButtonStyle = styled(Button)(() => ({
   borderColor: 'inherit',
   borderRadius: 23,
   padding: '6px 16px 6px 16px',
@@ -93,7 +88,7 @@ const NextButtonStyle = styled(Button)(({ theme }) => ({
   height: 36
 }));
 
-const NextButtonStyle1 = styled(Button)(({ theme }) => ({
+const NextButtonStyle1 = styled(Button)(() => ({
   borderColor: 'inherit',
   borderRadius: 23,
   padding: '6px 16px 6px 16px',
@@ -109,7 +104,6 @@ export function GeneralForm({
   disabled,
   selectedBrand,
   handleSetHeading,
-  formData,
   handleNext,
   handleBack,
   activeStep,
@@ -138,7 +132,7 @@ export function GeneralForm({
       ],
       captionQuestions: [{ caption_question: '' }]
     },
-    onSubmit: async (values, { resetForm }: any) => {
+    onSubmit: async (values) => {
       try {
         const payload = {
           ...values,
@@ -257,17 +251,6 @@ export function GeneralForm({
                     {heading} {renderTaskName(heading, handleSetHeading)}
                   </HeadingStyle>
                   {map(fields, (item: any) => {
-                    const fieldProps = {
-                      ...item,
-                      getFieldProps,
-                      touched,
-                      errors,
-                      handleChange,
-                      values,
-                      setFieldValue,
-                      handleDrop
-                    };
-
                     return (
                       <RewardsSection
                         selectedBrand={selectedBrand}
@@ -314,17 +297,6 @@ export function GeneralForm({
                   </HeadingStyle>
 
                   {map(fields, (item: any) => {
-                    const fieldProps = {
-                      ...item,
-                      getFieldProps,
-                      touched,
-                      errors,
-                      handleChange,
-                      values,
-                      setFieldValue,
-                      handleDrop
-                    };
-
                     return (
                       <BonusSection
                         selectedBrand={selectedBrand}
@@ -347,17 +319,6 @@ export function GeneralForm({
                     {heading} {renderTaskName(heading, handleSetHeading)}
                   </HeadingStyle>
                   {map(fields, (item: any) => {
-                    const fieldProps = {
-                      ...item,
-                      getFieldProps,
-                      touched,
-                      errors,
-                      handleChange,
-                      values,
-                      setFieldValue,
-                      handleDrop
-                    };
-
                     return (
                       <CaptainSection
                         sel
