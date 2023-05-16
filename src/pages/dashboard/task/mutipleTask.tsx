@@ -113,11 +113,8 @@ export default function MultipleTask() {
           validationSchema={validationSchema}
           fieldJson={taskForm.TASK_SECOND_WATCH_FORM}
           disabled={false}
-          selectedBrand={selectedBrand}
           handleSetHeading={handleSetHeading}
-          formData={{}}
           activeStep={activeStep}
-          handleNext={handleNextAuidenceData}
           handleBack={handleBack}
           handleSaveNext={handleSaveNext}
         />
@@ -143,11 +140,8 @@ export default function MultipleTask() {
           validationSchema={validationSchema}
           fieldJson={taskForm.TASK_SECOND_QUESTION_FORM}
           disabled={false}
-          selectedBrand={selectedBrand}
           handleSetHeading={handleSetHeading}
-          formData={{}}
           activeStep={activeStep}
-          handleNext={handleNextAuidenceData}
           handleBack={handleBack}
           handleSaveNext={handleSaveNext}
         />
@@ -172,11 +166,8 @@ export default function MultipleTask() {
           validationSchema={validationSchema}
           fieldJson={taskForm.TASK_SECOND_CONTEST_FORM}
           disabled={false}
-          selectedBrand={selectedBrand}
           handleSetHeading={handleSetHeading}
-          formData={{}}
           activeStep={activeStep}
-          handleNext={handleNextAuidenceData}
           handleBack={handleBack}
           handleSaveNext={handleSaveNext}
         />
@@ -204,11 +195,8 @@ export default function MultipleTask() {
           validationSchema={validationSchema}
           fieldJson={taskForm.TASK_SECOND_CONTEST_FORM}
           disabled={false}
-          selectedBrand={selectedBrand}
           handleSetHeading={handleSetHeading}
-          formData={{}}
           activeStep={activeStep}
-          handleNext={handleNextAuidenceData}
           handleBack={handleBack}
           handleSaveNext={handleSaveNext}
         />

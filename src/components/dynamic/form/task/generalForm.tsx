@@ -316,8 +316,7 @@ export function GeneralForm({
                   </HeadingStyle>
                   {map(fields, (item: any) => (
                     <CaptainSection
-                      sel
-                      ectedBrand={selectedBrand}
+                      selectedBrand={selectedBrand}
                       touched={touched}
                       errors={errors}
                       handleChange={handleChange}
