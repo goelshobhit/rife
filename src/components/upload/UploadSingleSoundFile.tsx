@@ -1,4 +1,3 @@
-import { isString } from 'lodash';
 import { useDropzone, DropzoneOptions } from 'react-dropzone';
 // material
 import { alpha, styled } from '@material-ui/core/styles';
@@ -23,7 +22,7 @@ const DropZoneStyle = styled('div')(({ theme }) => ({
   padding: 1,
   transition: theme.transitions.create('padding'),
   border: `2px solid #00BAEF`,
-  color:"#00BAEF",
+  color: '#00BAEF',
   borderRadius: 23,
   '&:hover': {
     opacity: 0.72,
@@ -43,14 +42,14 @@ interface UploadSingleFileProps extends DropzoneOptions {
   error?: boolean;
   file: CustomFile | string | null;
   sx?: SxProps<Theme>;
-  desc?: string |  null;
+  desc?: string | null;
 }
 
 export default function UploadSingleFile({
   error = false,
   file,
   sx,
-  desc = "Drop or Select file",
+  desc = 'Drop or Select file',
   ...other
 }: UploadSingleFileProps) {
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
@@ -97,35 +96,41 @@ export default function UploadSingleFile({
             color: 'error.main',
             borderColor: 'error.light',
             bgcolor: 'error.lighter'
-          }),
+          })
         }}
       >
         <input {...getInputProps()} />
-        <Box sx={{ p: 1, ml: { md: 2 } }} style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          width:'100%'
-        }}>
-          <span style={{ marginRight: 24 }}><UploadSoundIllustration /></span>Upload Sound
+        <Box
+          sx={{ p: 1, ml: { md: 2 } }}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%'
+          }}
+        >
+          <span style={{ marginRight: 24 }}>
+            <UploadSoundIllustration />
+          </span>
+          Upload Sound
         </Box>
       </DropZoneStyle>
       {file && (
-          <Box
-            component="img"
-            alt="file preview"
-            src='https://www.computerhope.com/jargon/m/mp3.png'
-            sx={{
-              top: 8,
-              borderRadius: 1,
-              objectFit: 'cover',
-              width: '100px',
-              height: '100px',
-              marginTop: 2,
-            }}
-          />
-        )}
+        <Box
+          component="img"
+          alt="file preview"
+          src="https://www.computerhope.com/jargon/m/mp3.png"
+          sx={{
+            top: 8,
+            borderRadius: 1,
+            objectFit: 'cover',
+            width: '100px',
+            height: '100px',
+            marginTop: 2
+          }}
+        />
+      )}
       {fileRejections.length > 0 && <ShowRejectionItems />}
     </Box>
   );

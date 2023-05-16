@@ -120,7 +120,6 @@ export default function BonusList() {
     </Grid>
   );
 
-
   const mapDataToTargetStructure = (rows: any) =>
     rows.map((row: any, index: any) => ({
       id: index,
@@ -128,7 +127,7 @@ export default function BonusList() {
       brandName: get(row, 'task_data.brand.brand_name'),
       Tier: 0,
       campaign: 0,
-      taskType: "Question",
+      taskType: 'Question',
       tokenProgress: 0,
       targetReachProgress: 0,
       budget: get(row, 'task_data.ta_total_available'),
@@ -197,7 +196,7 @@ export default function BonusList() {
       field: 'tokenProgress',
       headerName: 'Token Progress',
       width: 200,
-      renderCell: (params) => {
+      renderCell: () => {
         const value = Math.floor(Math.random() * 100) + 25;
         return (
           <Stack direction="column" alignItems="center">
@@ -226,7 +225,7 @@ export default function BonusList() {
       field: 'targetReachProgress',
       headerName: 'Target Reach Progress',
       width: 200,
-      renderCell: (params) => {
+      renderCell: () => {
         const value = Math.floor(Math.random() * 100) + 25;
         return (
           <Stack direction="column" alignItems="center">
@@ -330,38 +329,31 @@ export default function BonusList() {
       field: 'state',
       headerName: 'State',
       width: 200,
-      renderCell: (params) => {
-        const getStatus = params.row.state;
-        return (
-          <Label
-            color={renderColorStatusCode(toNumber(params.row.state))}
-            sx={{ textTransform: 'capitalize', mx: 'auto' }}
-          >
-            {renderTask(toNumber(params.row.state))}
-          </Label>
-        );
-      }
+      renderCell: (params) => (
+        <Label
+          color={renderColorStatusCode(toNumber(params.row.state))}
+          sx={{ textTransform: 'capitalize', mx: 'auto' }}
+        >
+          {renderTask(toNumber(params.row.state))}
+        </Label>
+      )
     }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(taskListTotal / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getQuestionListTask({ brandPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(taskListTotal / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getQuestionListTask({ brandPageNo: value }));
+      }}
+    />
+  );
 
   const navigate = useNavigate();
-  
+
   return (
     <>
       <BrandRowWrapper>
@@ -381,7 +373,7 @@ export default function BonusList() {
           variant="contained"
           color="primary"
           className="button"
-          onClick={() => navigate("/dashboard/task/create")}
+          onClick={() => navigate('/dashboard/task/create')}
         >
           {' '}
           + Add New Task

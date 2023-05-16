@@ -3,7 +3,6 @@ import { Link as RouterLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
-import moment from 'moment';
 // material
 import { Typography, Box, Pagination, Button, Grid, Skeleton, Link } from '@material-ui/core';
 
@@ -46,7 +45,6 @@ export default function UsersList() {
   const { loading, adminUsersList } = useSelector((state: { users: usersState }) => state.users);
   const [page, setPageNo] = useState(1);
 
-
   useEffect(() => {
     dispatch(getAdminUsersList({ bonusPageNo: page }));
   }, [dispatch, page]);
@@ -65,13 +63,12 @@ export default function UsersList() {
     </Grid>
   );
 
-
   const mapDataToTargetStructure = (rows: any) =>
     rows.map((row: any) => ({
       id: row.au_user_id,
-      userName: get(row,'au_name','-'),
-      u_email: get(row,'au_email','-'),
-      u_active: row.au_active_status ? 'True' : 'False',
+      userName: get(row, 'au_name', '-'),
+      u_email: get(row, 'au_email', '-'),
+      u_active: row.au_active_status ? 'True' : 'False'
     }));
 
   const columns: GridColDef[] = [
@@ -89,9 +86,7 @@ export default function UsersList() {
           variant="body2"
           component={RouterLink}
         >
-          <TextCellWrapperLink variant="subtitle1">
-            {params.row.userName}
-          </TextCellWrapperLink>
+          <TextCellWrapperLink variant="subtitle1">{params.row.userName}</TextCellWrapperLink>
         </Link>
       )
     },
@@ -104,24 +99,20 @@ export default function UsersList() {
       field: 'u_active',
       headerName: 'Active',
       width: 200
-    },
+    }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(adminUsersList, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getAdminUsersList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(adminUsersList, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getAdminUsersList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <>
@@ -145,7 +136,7 @@ export default function UsersList() {
       </BrandRowWrapper>
 
       {loading && <SkeletonLoad />}
-       {!loading && (
+      {!loading && (
         <DataGrid
           rows={mapDataToTargetStructure(get(adminUsersList, 'data', []))}
           columns={columns}

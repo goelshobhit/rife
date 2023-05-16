@@ -91,7 +91,7 @@ export default function UploadSingleFile({
     </Paper>
   );
 
-  const [fileList, setFileList] = useState([
+  const [fileList] = useState([
     {
       uid: '-1',
       name: 'image.png',
@@ -166,21 +166,23 @@ export default function UploadSingleFile({
           }}
         >
           <input {...getInputProps()} />
-          {!file && <Box
-            sx={{ p: 1, ml: { md: 2 } }}
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '100%',
-              fontSize: 48,
-              fontWeight: 800,
-              marginRight: 12
-            }}
-          >
-            +
-          </Box>}
+          {!file && (
+            <Box
+              sx={{ p: 1, ml: { md: 2 } }}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '100%',
+                fontSize: 48,
+                fontWeight: 800,
+                marginRight: 12
+              }}
+            >
+              +
+            </Box>
+          )}
           {file && (
             <Box
               component="img"
@@ -190,7 +192,7 @@ export default function UploadSingleFile({
                 top: 8,
                 borderRadius: 1,
                 objectFit: 'cover',
-                height:'100%'
+                height: '100%'
               }}
             />
           )}

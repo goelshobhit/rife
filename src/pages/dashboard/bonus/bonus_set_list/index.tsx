@@ -4,7 +4,7 @@ import moment from 'moment';
 import { motion } from 'framer-motion';
 import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
-import{ sum, map, toNumber, round } from 'lodash';
+import { sum, map, toNumber, round } from 'lodash';
 // material
 import { Typography, Box, Pagination, Button, Grid, Skeleton, Link } from '@material-ui/core';
 
@@ -66,24 +66,28 @@ export default function BonusSetList() {
     </Grid>
   );
 
-
-
-  const mapDataToTargetStructure = (rows: any) => rows.map((row: any) => ({
+  const mapDataToTargetStructure = (rows: any) =>
+    rows.map((row: any) => ({
       id: row.bonus_set_brand_id,
       bonus_item_brand_id: row.bonus_set_brand_id,
       bonus_item_name: row.bonus_set_item_name,
       brandName: get(row, 'brand.brand_name'),
-      endDate: moment(row.bonus_set_start_date).add('day', row.bonus_set_duration).format('MMM DD,YYYY'),
+      endDate: moment(row.bonus_set_start_date)
+        .add('day', row.bonus_set_duration)
+        .format('MMM DD,YYYY'),
       noOfBonuses: get(row, 'total_bonus_items'),
-      averageOfASingleBonus: round(get(row, 'average_dollar_value',0), 2),
-      valueOfAllBonuses: sum(map(get(row,'bonus_items'), (item: any) => toNumber(item.bonus_item_dollar_value))),
+      averageOfASingleBonus: round(get(row, 'average_dollar_value', 0), 2),
+      valueOfAllBonuses: sum(
+        map(get(row, 'bonus_items'), (item: any) => toNumber(item.bonus_item_dollar_value))
+      ),
       noOfParticipants: get(row, 'total_participants', 0),
       noOfTicket: get(row, 'total_tickets', 0),
-      avgUserTicket: get(row, 'total_tickets', 0) > 0 ? get(row, 'total_tickets', 0) / get(row, 'total_participants', 0): 0,
-      status: moment(row.bonus_set_start_date).add('day', row.bonus_set_duration).isAfter(moment()),
-    }))
-
-    
+      avgUserTicket:
+        get(row, 'total_tickets', 0) > 0
+          ? get(row, 'total_tickets', 0) / get(row, 'total_participants', 0)
+          : 0,
+      status: moment(row.bonus_set_start_date).add('day', row.bonus_set_duration).isAfter(moment())
+    }));
 
   const columns: GridColDef[] = [
     {
@@ -100,7 +104,6 @@ export default function BonusSetList() {
           variant="body2"
           component={RouterLink}
         >
-
           <TextCellWrapperLink variant="subtitle1">
             {params.row.bonus_item_name}
           </TextCellWrapperLink>
@@ -121,10 +124,10 @@ export default function BonusSetList() {
         const getStatus = params.row.status;
         return (
           <Label
-            color={getStatus ? 'success': 'error'}
+            color={getStatus ? 'success' : 'error'}
             sx={{ textTransform: 'capitalize', mx: 'auto' }}
           >
-            {getStatus ? "Active" :'Inactive'}
+            {getStatus ? 'Active' : 'Inactive'}
           </Label>
         );
       }
@@ -161,54 +164,55 @@ export default function BonusSetList() {
     }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(bonusSetList, 'totalRecords') / 5)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getBonusSetList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(bonusSetList, 'totalRecords') / 5)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getBonusSetList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
-  <>
-<BrandRowWrapper>
-  <MotionContainer
-    open
-    initial="initial"
-    component={motion.h4}
-    sx={{ typography: 'h4', display: 'flex', overflow: 'hidden' }}
-  >
-   <motion.span key={1} variants={getVariant('slideInUp')}>
-      Bonus Set
-    </motion.span>
-  </MotionContainer>
-  <Button variant="contained" color="primary" className="button" href="/dashboard/bonus/set/add">
-    + Add New Bonus Set
-  </Button>
-</BrandRowWrapper>
+    <>
+      <BrandRowWrapper>
+        <MotionContainer
+          open
+          initial="initial"
+          component={motion.h4}
+          sx={{ typography: 'h4', display: 'flex', overflow: 'hidden' }}
+        >
+          <motion.span key={1} variants={getVariant('slideInUp')}>
+            Bonus Set
+          </motion.span>
+        </MotionContainer>
+        <Button
+          variant="contained"
+          color="primary"
+          className="button"
+          href="/dashboard/bonus/set/add"
+        >
+          + Add New Bonus Set
+        </Button>
+      </BrandRowWrapper>
 
-{loading && <SkeletonLoad />}
-{!loading && (
-  <DataGrid
-    autoHeight
-    rows={mapDataToTargetStructure(get(bonusSetList, 'data', []))}
-    columns={columns}
-    pagination
-    pageSize={10}
-    components={{
-      Toolbar: GridToolbar,
-      Pagination: CustomPagination
-    }}
-  />
-)}
-</>
+      {loading && <SkeletonLoad />}
+      {!loading && (
+        <DataGrid
+          autoHeight
+          rows={mapDataToTargetStructure(get(bonusSetList, 'data', []))}
+          columns={columns}
+          pagination
+          pageSize={10}
+          components={{
+            Toolbar: GridToolbar,
+            Pagination: CustomPagination
+          }}
+        />
+      )}
+    </>
   );
 }

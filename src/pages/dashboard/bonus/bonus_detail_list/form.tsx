@@ -1,4 +1,3 @@
-import { useState, useCallback } from 'react';
 import { useSnackbar } from 'notistack5';
 import { useNavigate } from 'react-router-dom';
 import { FieldArray, Form, FormikProvider, useFormik } from 'formik';
@@ -6,7 +5,6 @@ import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
 import map from 'lodash/map';
 import size from 'lodash/size';
-import sum from 'lodash/sum';
 import includes from 'lodash/includes';
 // material
 import {
@@ -16,21 +14,14 @@ import {
   Typography,
   Button,
   MenuItem,
-  FormControl,
-  FormControlLabel,
-  Autocomplete,
-  Chip,
-  Select,
-  Input
+  Autocomplete
 } from '@material-ui/core';
 // @types
-import { rewardState } from '../../../../@types/reward';
 
 import { TrashIcon } from '../../../../assets';
-import { useDispatch, useSelector } from '../../../../redux/store';
+import { useDispatch } from '../../../../redux/store';
 import { createBonusTicketRules, getBonusRuleList } from '../../../../redux/slices/bonus';
 // utils
-import { fData } from '../../../../utils/formatNumber';
 
 interface Props {
   rewardBrandList: Array<[]>;
@@ -122,7 +113,7 @@ export default function RewardNewForm({ rewardBrandList }: Props) {
         setSubmitting(false);
         enqueueSnackbar('Bonus Ticket Rule Created', { variant: 'success' });
         navigate('/dashboard/bonus/rule');
-        dispatch(getBonusRuleList({ bonusPageNo: 1 }))
+        dispatch(getBonusRuleList({ bonusPageNo: 1 }));
       } catch (error) {
         console.error(error);
         setSubmitting(false);

@@ -1,23 +1,10 @@
 import * as Yup from 'yup';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useSnackbar } from 'notistack5';
 import { useFormik, Form, FormikProvider } from 'formik';
 // material
-import { LoadingButton } from '@material-ui/lab';
 import { styled } from '@material-ui/core/styles';
-import {
-  Grid,
-  Card,
-  Chip,
-  Stack,
-  Switch,
-  Button,
-  TextField,
-  Typography,
-  Autocomplete,
-  FormHelperText,
-  FormControlLabel
-} from '@material-ui/core';
+import { Grid, Button, TextField, Typography } from '@material-ui/core';
 
 interface FormValues {
   booster_value_in_tokens: number;
@@ -98,7 +85,8 @@ export default function WithMaterialUIRewardSettingForm({ initialVal }: Props) {
     }
   });
 
-  const { errors, values, touched, handleSubmit, isSubmitting, setFieldValue, getFieldProps } = formik;
+  const { errors, values, touched, handleSubmit, isSubmitting, setFieldValue, getFieldProps } =
+    formik;
 
   return (
     <div style={{ marginTop: 14 }}>

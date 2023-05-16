@@ -27,7 +27,6 @@ import { taskBrandsState } from '../../../../@types/task';
 import { taskForm } from '../../../../constants/questions';
 import { getItem, setItem } from '../../../../utils/storage';
 
-
 interface InitialValues {
   select_brand: string;
   task_type: string;
@@ -90,12 +89,13 @@ const NextButtonStyle = styled(Button)(({ theme }) => ({
 }));
 
 export default function TaskBrand({ handleNext, handleShowSteps, handleSetSelectBrand }: any) {
-
   const formInitialValues = getItem('task_form_1');
 
-
   const formik = useFormik<InitialValues>({
-    initialValues: { select_brand: get(formInitialValues,'select_brand',''), task_type: get(formInitialValues,'task_type', '')},
+    initialValues: {
+      select_brand: get(formInitialValues, 'select_brand', ''),
+      task_type: get(formInitialValues, 'task_type', '')
+    },
     validationSchema: LoginSchema,
     onSubmit: async (values, { resetForm }) => {
       try {
@@ -131,7 +131,6 @@ export default function TaskBrand({ handleNext, handleShowSteps, handleSetSelect
     getFieldProps
   };
 
-
   return (
     <>
       <FormikProvider value={formik}>
@@ -150,8 +149,10 @@ export default function TaskBrand({ handleNext, handleShowSteps, handleSetSelect
                 label={fieldProps.label}
                 value={values.select_brand}
                 onChange={(e) => {
-                 
-                  const selectedBrand = find(brands, (item: any) => toLower(item.name) === toLower(e.target.value));
+                  const selectedBrand = find(
+                    brands,
+                    (item: any) => toLower(item.name) === toLower(e.target.value)
+                  );
                   handleSetSelectBrand(selectedBrand);
                   setFieldValue(fieldProps.name, get(e, 'target.value'));
                 }}
@@ -159,7 +160,7 @@ export default function TaskBrand({ handleNext, handleShowSteps, handleSetSelect
                 error={Boolean(touched.select_brand && errors.select_brand)}
                 helperText={touched.select_brand && errors.select_brand}
                 InputLabelProps={{
-                  shrink: true,
+                  shrink: true
                 }}
               >
                 <MenuItem value="" key="">
@@ -183,7 +184,7 @@ export default function TaskBrand({ handleNext, handleShowSteps, handleSetSelect
               <RadioGroup
                 aria-labelledby="demo-error-radios"
                 name="quiz"
-                value={get(values,'task_type')}
+                value={get(values, 'task_type')}
                 onChange={handleChange}
                 style={{ width: '100%', display: 'flex', flexDirection: 'row' }}
               >
@@ -201,9 +202,7 @@ export default function TaskBrand({ handleNext, handleShowSteps, handleSetSelect
                     <CardStyle
                       style={{
                         border:
-                          get(values, 'task_type') === item
-                            ? '2px solid black'
-                            : '1px solid #fff'
+                          get(values, 'task_type') === item ? '2px solid black' : '1px solid #fff'
                       }}
                     >
                       <BrandStyle variant="h4">{item}</BrandStyle>

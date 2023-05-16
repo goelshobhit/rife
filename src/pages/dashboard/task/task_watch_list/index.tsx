@@ -118,7 +118,6 @@ export default function BonusList() {
     </Grid>
   );
 
-
   const mapDataToTargetStructure = (rows: any) =>
     rows.map((row: any, index: any) => ({
       id: index,
@@ -126,7 +125,7 @@ export default function BonusList() {
       brandName: get(row, 'task_data.brand.brand_name'),
       Tier: 0,
       campaign: 0,
-      taskType: "Watch",
+      taskType: 'Watch',
       tokenProgress: 0,
       targetReachProgress: 0,
       budget: get(row, 'task_data.ta_total_available'),
@@ -343,21 +342,17 @@ export default function BonusList() {
     }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(taskListTotal / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getWatchListTask({ brandPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(taskListTotal / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getWatchListTask({ brandPageNo: value }));
+      }}
+    />
+  );
 
   const navigate = useNavigate();
 
@@ -380,7 +375,7 @@ export default function BonusList() {
           variant="contained"
           color="primary"
           className="button"
-          onClick={() => navigate("/dashboard/task/create")}
+          onClick={() => navigate('/dashboard/task/create')}
         >
           {' '}
           + Add New Task

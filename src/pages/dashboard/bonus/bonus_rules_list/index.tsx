@@ -29,7 +29,6 @@ import getVariant from '../../../components-overview/extra/animate/getVariant';
 import LoadingScreen from '../../../../components/LoadingScreen';
 import Label from '../../../../components/Label';
 
-
 const TextCellWrapperLink = styled(Typography)(() => ({
   fontSize: 14,
   color: '#00BAEF',
@@ -45,15 +44,15 @@ const BrandRowWrapper = styled('div')(() => ({
 }));
 
 const renderColorStatusCode = (index: any) => {
-  switch(index) {
+  switch (index) {
     case 0:
       return 'success';
     case 1:
-        return 'error';
+      return 'error';
     default:
       return 'warning';
   }
-}
+};
 export default function BonusRuleList() {
   const dispatch = useDispatch();
   const { loading, bonusRuleList } = useSelector((state: { bonus: bonusState }) => state.bonus);
@@ -63,11 +62,10 @@ export default function BonusRuleList() {
     dispatch(getBonusRuleList({ bonusPageNo: page }));
   }, [dispatch, page]);
 
-  const SkeletonLoad = () => (
-     <LoadingScreen />
-  );
+  const SkeletonLoad = () => <LoadingScreen />;
 
-  const mapDataToTargetStructure = (rows: any) => rows.map((row: any) => ({
+  const mapDataToTargetStructure = (rows: any) =>
+    rows.map((row: any) => ({
       id: row.bonus_ticket_rules_id,
       bonus_item_brand_id: row.bonus_ticket_rules_id,
       bonus_item_name: row.bonus_ticket_rule_name,
@@ -76,9 +74,8 @@ export default function BonusRuleList() {
       createdAt: moment(row.bonus_ticket_rules_created_at).format('MMM DD, YYYY'),
       updatedAt: moment(row.bonus_ticket_rules_created_at).format('MMM DD, YYYY'),
       Status: isEmpty(row.bonus_ticket_rule_details) ? 1 : 0,
-      brand: '-',
-    }))
-    
+      brand: '-'
+    }));
 
   const columns: GridColDef[] = [
     {
@@ -96,7 +93,7 @@ export default function BonusRuleList() {
           component={RouterLink}
         >
           <TextCellWrapperLink variant="subtitle1">
-            {get(params,'row.bonus_item_name', '-')}
+            {get(params, 'row.bonus_item_name', '-')}
           </TextCellWrapperLink>
         </Link>
       )
@@ -104,41 +101,34 @@ export default function BonusRuleList() {
     {
       field: 'brand',
       headerName: 'Brand',
-      width: 300,
+      width: 300
     },
     {
       field: 'Status',
       headerName: 'Status',
       width: 300,
-      renderCell: (params) => {
-        const getStatus = params.row.Status;
-        return (
-          <Label
-            color={renderColorStatusCode(params.row.Status)}
-            sx={{ textTransform: 'capitalize', mx: 'auto' }}
-          >
-            {params.row.Status === 0 ? "Active" :'Inactive'}
-          </Label>
-        );
-      }
-    },
+      renderCell: (params) => (
+        <Label
+          color={renderColorStatusCode(params.row.Status)}
+          sx={{ textTransform: 'capitalize', mx: 'auto' }}
+        >
+          {params.row.Status === 0 ? 'Active' : 'Inactive'}
+        </Label>
+      )
+    }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(bonusRuleList, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getBonusRuleList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(bonusRuleList, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getBonusRuleList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <>
@@ -149,11 +139,16 @@ export default function BonusRuleList() {
           component={motion.h4}
           sx={{ typography: 'h4', display: 'flex', overflow: 'hidden' }}
         >
-         <motion.span key={1} variants={getVariant('slideInUp')}>
+          <motion.span key={1} variants={getVariant('slideInUp')}>
             Bonus Ticket Rules
           </motion.span>
         </MotionContainer>
-        <Button variant="contained" color="primary" className="button" href="/dashboard/bonus/rule/add">
+        <Button
+          variant="contained"
+          color="primary"
+          className="button"
+          href="/dashboard/bonus/rule/add"
+        >
           + Add New Bonus Rules
         </Button>
       </BrandRowWrapper>

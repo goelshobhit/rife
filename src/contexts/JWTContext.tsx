@@ -1,8 +1,10 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react';
 // utils
 import axios from '../utils/axios';
-import { isValidToken, setSession, setUser, sign } from '../utils/jwt';
-import mappedUserDataWithTemplateUser, {parseUserDataOfStringType}from '../utils/mapping/userDataWithTemplate';
+import { setSession, setUser } from '../utils/jwt';
+import mappedUserDataWithTemplateUser, {
+  parseUserDataOfStringType
+} from '../utils/mapping/userDataWithTemplate';
 // @types
 import { ActionMap, AuthState, AuthUser, JWTContextType } from '../@types/authentication';
 
@@ -81,7 +83,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
         const accessToken = window.localStorage.getItem('accessToken');
         // get token from browser storage
         const userData = window.localStorage.getItem('user');
-      // get user from browser storage, store user information during login
+        // get user from browser storage, store user information during login
         const user = parseUserDataOfStringType(userData);
         if (accessToken && user) {
           setSession(accessToken);

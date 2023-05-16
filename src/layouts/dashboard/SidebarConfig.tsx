@@ -1,7 +1,6 @@
 // routes
 import { PATH_DASHBOARD } from '../../routes/paths';
 // components
-import Label from '../../components/Label';
 import SvgIconStyle from '../../components/SvgIconStyle';
 
 // ----------------------------------------------------------------------
@@ -33,7 +32,7 @@ const sidebarConfig = [
         title: 'Dashboard',
         path: PATH_DASHBOARD.general.app,
         icon: ICONS.dashboard
-      },
+      }
     ]
   },
 
@@ -49,7 +48,7 @@ const sidebarConfig = [
         children: [
           { title: 'Contest', path: PATH_DASHBOARD.task.contest },
           { title: 'Question', path: PATH_DASHBOARD.task.questions },
-          { title: 'Watch', path: PATH_DASHBOARD.task.watch },
+          { title: 'Watch', path: PATH_DASHBOARD.task.watch }
         ]
       },
       {
@@ -59,7 +58,7 @@ const sidebarConfig = [
         children: [
           { title: 'Bonus Prizes', path: PATH_DASHBOARD.bonus.bonus_prize },
           { title: 'Bonus Rules', path: PATH_DASHBOARD.bonus.bonus_rule },
-          { title: 'Bonus Set', path: PATH_DASHBOARD.bonus.bonus_set },
+          { title: 'Bonus Set', path: PATH_DASHBOARD.bonus.bonus_set }
         ]
       },
       {
@@ -74,7 +73,7 @@ const sidebarConfig = [
           { title: 'Score Engagement Setting', path: PATH_DASHBOARD.brand.brand_root },
           { title: 'Score Increase', path: PATH_DASHBOARD.brand.brand_root },
           { title: 'Quick List', path: PATH_DASHBOARD.brand.brand_root },
-          { title: 'Task Closed', path: PATH_DASHBOARD.brand.brand_root },
+          { title: 'Task Closed', path: PATH_DASHBOARD.brand.brand_root }
         ]
       },
       {
@@ -83,16 +82,16 @@ const sidebarConfig = [
         icon: ICONS.user,
         children: [
           { title: 'Admin Users', path: PATH_DASHBOARD.userList.userList_admin_root },
-          { title: 'Invited Users', path: PATH_DASHBOARD.userList.userList_invited_root },
+          { title: 'Invited Users', path: PATH_DASHBOARD.userList.userList_invited_root }
         ]
       },
       {
         title: 'Reward',
         path: PATH_DASHBOARD.reward.reward_center,
-        icon: ICONS.cart,
-      },
+        icon: ICONS.cart
+      }
     ]
-  },
+  }
   // APP
   // ----------------------------------------------------------------------
   // {

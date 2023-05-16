@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { styled } from '@material-ui/core/styles';
 // material
-import { Box, Grid, Skeleton, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import get from 'lodash/get';
 
 import { useDispatch, useSelector } from '../../../../redux/store';
 import { getAllBrands } from '../../../../redux/slices/reward';
-import {  getBonusRuleList } from '../../../../redux/slices/bonus';
-// @types, 
+import { getBonusRuleList } from '../../../../redux/slices/bonus';
+// @types,
 import { rewardState } from '../../../../@types/reward';
 import { bonusState } from '../../../../@types/bonus';
 // components
@@ -35,15 +35,13 @@ export default function RewardList() {
     (state: { reward: rewardState }) => state.reward
   );
 
-  const { bonusRuleList } = useSelector(
-    (state: { bonus: bonusState }) => state.bonus
-  );
+  const { bonusRuleList } = useSelector((state: { bonus: bonusState }) => state.bonus);
 
   const [page, setPageNo] = useState(brandPageNo);
 
   useEffect(() => {
-    dispatch(getBonusRuleList({ bonusPageNo: 1}));
-  },[]);
+    dispatch(getBonusRuleList({ bonusPageNo: 1 }));
+  }, []);
 
   useEffect(() => {
     if (hasMoreBrands) {
@@ -62,7 +60,10 @@ export default function RewardList() {
       {!loading && (
         <Scrollbar sx={{ flexGrow: 1 }}>
           <HeadingStyle variant="h3">Create Bonus Set</HeadingStyle>
-          <RewardNewForm rewardBrandList={rewardBrandList} bonusRuleList={get(bonusRuleList,'data',[])} />
+          <RewardNewForm
+            rewardBrandList={rewardBrandList}
+            bonusRuleList={get(bonusRuleList, 'data', [])}
+          />
         </Scrollbar>
       )}
     </RootStyle>

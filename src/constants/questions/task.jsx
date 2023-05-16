@@ -1,4 +1,4 @@
-import { MULTIPLE_TASK_STEPS as STEPS, WATCH_FORM as FORM, FIELDTYPE } from './constants';
+import { WATCH_FORM as FORM, FIELDTYPE } from './constants';
 
 export const taskSteps = ['Campaign', 'Type & Auidence', 'Details'];
 

@@ -46,7 +46,6 @@ export default function UsersList() {
   const { loading, usersList } = useSelector((state: { users: usersState }) => state.users);
   const [page, setPageNo] = useState(1);
 
-
   useEffect(() => {
     dispatch(getUsersList({ bonusPageNo: page }));
   }, [dispatch, page]);
@@ -68,18 +67,18 @@ export default function UsersList() {
   const mapDataToTargetStructure = (rows: any) =>
     rows.map((row: any) => ({
       id: row.u_id,
-      userName: get(row,'user_profile.u_f_name','-') + get(row,'user_profile.u_l_name', ''),
-      u_email: get(row,'u_email','-'),
+      userName: get(row, 'user_profile.u_f_name', '-') + get(row, 'user_profile.u_l_name', ''),
+      u_email: get(row, 'u_email', '-'),
       u_active: row.u_active ? 'True' : 'False',
-      facebookId: get(row,'u_fb_username','-'),
-      googleId: get(row,'u_gmail_username','-'),
-      yMaildId: get(row,'u_ymail_username','-'),
-      instagramId: get(row,'u_instagram_username', '-'),
-      emailVerified: row.u_email_verify_status ? 'true': 'false',
-      is_user_deactivated: row.is_user_deactivated ? 'true': 'false',
-      is_user_hidden: row.is_user_hidden ? 'true': 'false',
-      gender: get(row,'user_profile.u_gender'),
-      createdAt: moment(get(row,'user_profile.u_created_at')).format('MMM DD, YYYY'),
+      facebookId: get(row, 'u_fb_username', '-'),
+      googleId: get(row, 'u_gmail_username', '-'),
+      yMaildId: get(row, 'u_ymail_username', '-'),
+      instagramId: get(row, 'u_instagram_username', '-'),
+      emailVerified: row.u_email_verify_status ? 'true' : 'false',
+      is_user_deactivated: row.is_user_deactivated ? 'true' : 'false',
+      is_user_hidden: row.is_user_hidden ? 'true' : 'false',
+      gender: get(row, 'user_profile.u_gender'),
+      createdAt: moment(get(row, 'user_profile.u_created_at')).format('MMM DD, YYYY')
     }));
 
   const columns: GridColDef[] = [
@@ -97,9 +96,7 @@ export default function UsersList() {
           variant="body2"
           component={RouterLink}
         >
-          <TextCellWrapperLink variant="subtitle1">
-            {params.row.userName}
-          </TextCellWrapperLink>
+          <TextCellWrapperLink variant="subtitle1">{params.row.userName}</TextCellWrapperLink>
         </Link>
       )
     },
@@ -138,24 +135,19 @@ export default function UsersList() {
       headerName: 'Created At',
       width: 200
     }
-    
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(usersList, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getUsersList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(usersList, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getUsersList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <>
@@ -179,7 +171,7 @@ export default function UsersList() {
       </BrandRowWrapper>
 
       {loading && <SkeletonLoad />}
-       {!loading && (
+      {!loading && (
         <DataGrid
           rows={mapDataToTargetStructure(get(usersList, 'data', []))}
           columns={columns}

@@ -87,9 +87,7 @@ export default function BrandList() {
           variant="body2"
           component={RouterLink}
         >
-          <TextCellWrapperLink variant="subtitle1">
-            {params.row.cr_co_name}
-          </TextCellWrapperLink>
+          <TextCellWrapperLink variant="subtitle1">{params.row.cr_co_name}</TextCellWrapperLink>
         </Link>
       )
     },
@@ -97,24 +95,20 @@ export default function BrandList() {
       field: 'cr_co_created_at',
       headerName: 'Created At',
       width: 200
-    },
+    }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(brand_list, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getBrandList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(brand_list, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getBrandList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <>

@@ -32,26 +32,44 @@ export const questionCampaignForm = [
     heading: FORM.TASK_DETAIL,
     fields: [
       { label: FORM.TASK_LABEL, name: 'Survey title', type: FIELDTYPE.TEXT },
-      { label: FORM.PERCENTAGE_LABEL, name: 'Survey Color', type: FIELDTYPE.DROPDOWN, options: ['Green','Blue', 'Red', 'Purple'] },
-      { label: 'Status', name: 'Survey Status', type: FIELDTYPE.DROPDOWN, options: ['Active', 'InActive'] },
-      { label: 'User Restriction', name: 'User Restriction', type: FIELDTYPE.DROPDOWN, options: ['YES','NO'] }
+      {
+        label: FORM.PERCENTAGE_LABEL,
+        name: 'Survey Color',
+        type: FIELDTYPE.DROPDOWN,
+        options: ['Green', 'Blue', 'Red', 'Purple']
+      },
+      {
+        label: 'Status',
+        name: 'Survey Status',
+        type: FIELDTYPE.DROPDOWN,
+        options: ['Active', 'InActive']
+      },
+      {
+        label: 'User Restriction',
+        name: 'User Restriction',
+        type: FIELDTYPE.DROPDOWN,
+        options: ['YES', 'NO']
+      }
     ]
   },
   {
-    heading: "Brands",
-    fields: [
-      { label: 'Brand', name: 'Brand ID', type: 'brandDropDown' },
-    ]
+    heading: 'Brands',
+    fields: [{ label: 'Brand', name: 'Brand ID', type: 'brandDropDown' }]
   },
   {
     heading: FORM.AUDIENCE,
-    fields: [{ label: FORM.AUDIENCE, name: FORM.AUDIENCE_NAME, type: FIELDTYPE.DROPDOWN, options: ['Public','Tier Two', 'Tier Three'] }]
+    fields: [
+      {
+        label: FORM.AUDIENCE,
+        name: FORM.AUDIENCE_NAME,
+        type: FIELDTYPE.DROPDOWN,
+        options: ['Public', 'Tier Two', 'Tier Three']
+      }
+    ]
   },
   {
     heading: FORM.REWARDS,
-    fields: [
-      { label: FORM.STAR_LABEL, name: 'Stars Per User', type: FIELDTYPE.TEXT },
-    ]
+    fields: [{ label: FORM.STAR_LABEL, name: 'Stars Per User', type: FIELDTYPE.TEXT }]
   },
   {
     heading: FORM.QUESTIONS,
@@ -60,7 +78,7 @@ export const questionCampaignForm = [
     minQuestion: FORM.MIN_QUES,
     minAnswers: FORM.MIN_ANS,
     maxAnswers: FORM.MAX_ANS,
-    fields: [ {label: 'render_questions'}]
+    fields: [{ label: 'render_questions' }]
   },
   {
     heading: FORM.SCHEDULE,

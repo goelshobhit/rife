@@ -46,7 +46,6 @@ export default function UsersList() {
   const { loading, invitedUsersList } = useSelector((state: { users: usersState }) => state.users);
   const [page, setPageNo] = useState(1);
 
-
   useEffect(() => {
     dispatch(getInvitedUsersList({ bonusPageNo: page }));
   }, [dispatch, page]);
@@ -65,19 +64,21 @@ export default function UsersList() {
     </Grid>
   );
 
-
-
   const mapDataToTargetStructure = (rows: any) =>
     rows.map((row: any) => ({
       id: row.users_invitation_user_id,
-      userName: get(row,'user_profile.username','-'),
-      u_email: get(row,'users_invitation_recipient_email','-'),
-      users_invitation_recipient_mobile: get(row,'users_invitation_recipient_mobile','-'),
-      users_invitation_url: get(row,'users_invitation_url','-'),
-      users_invitation_invitation_timestamp: moment(get(row,'users_invitation_invitation_timestamp','-')).format('MMM DD, YYYY'),
-      users_invitation_received_acknowledgment_timestamp: moment(get(row,'users_invitation_received_acknowledgment_timestamp','-')).format('MMM DD, YYYY'),
-      users_invitation_status: get(row,'users_invitation_status','-'),
-      createdAt: moment(get(row,'ui_created_at')).format('MMM DD, YYYY'),
+      userName: get(row, 'user_profile.username', '-'),
+      u_email: get(row, 'users_invitation_recipient_email', '-'),
+      users_invitation_recipient_mobile: get(row, 'users_invitation_recipient_mobile', '-'),
+      users_invitation_url: get(row, 'users_invitation_url', '-'),
+      users_invitation_invitation_timestamp: moment(
+        get(row, 'users_invitation_invitation_timestamp', '-')
+      ).format('MMM DD, YYYY'),
+      users_invitation_received_acknowledgment_timestamp: moment(
+        get(row, 'users_invitation_received_acknowledgment_timestamp', '-')
+      ).format('MMM DD, YYYY'),
+      users_invitation_status: get(row, 'users_invitation_status', '-'),
+      createdAt: moment(get(row, 'ui_created_at')).format('MMM DD, YYYY')
     }));
 
   const columns: GridColDef[] = [
@@ -95,9 +96,7 @@ export default function UsersList() {
           variant="body2"
           component={RouterLink}
         >
-          <TextCellWrapperLink variant="subtitle1">
-            {params.row.userName}
-          </TextCellWrapperLink>
+          <TextCellWrapperLink variant="subtitle1">{params.row.userName}</TextCellWrapperLink>
         </Link>
       )
     },
@@ -136,24 +135,19 @@ export default function UsersList() {
       headerName: 'Created At',
       width: 200
     }
-    
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(invitedUsersList, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getInvitedUsersList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(invitedUsersList, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getInvitedUsersList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <>
@@ -177,7 +171,7 @@ export default function UsersList() {
       </BrandRowWrapper>
 
       {loading && <SkeletonLoad />}
-       {!loading && (
+      {!loading && (
         <DataGrid
           rows={mapDataToTargetStructure(get(invitedUsersList, 'data', []))}
           columns={columns}

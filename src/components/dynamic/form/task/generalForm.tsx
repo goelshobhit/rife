@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { useFormik, Form, FormikProvider, FieldArray } from 'formik';
-import * as Yup from 'yup';
 import { useSnackbar } from 'notistack5';
 import { Icon } from '@iconify/react';
 import closeFill from '@iconify/icons-eva/close-fill';
@@ -115,7 +114,7 @@ export function GeneralForm({
   handleBack,
   activeStep,
   auidenceFormData,
-  handleSaveNext,
+  handleSaveNext
 }: Props) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -124,17 +123,16 @@ export function GeneralForm({
   const formInitialValues1 = getItem('task_form_1');
   const formInitialValues2 = getItem('task_form_2');
 
-  
   const formik = useFormik<InitialValues>({
     initialValues: {
-      task_type: get(formInitialValues2,'task_type', ''),
-      task_name: get(formInitialValues2,'task_name', ''),
-      audience: get(formInitialValues2,'auidence', ''),
-      'Limit Redemptions': get(formInitialValues2, 'Limit Redemptions',''),
-      star_per_user: get(formInitialValues2,'star_per_user',''),
-      description: get(formInitialValues2,'description',''),
-      add_tokens_per_user: get(formInitialValues2,'add_tokens_per_user',''),
-      energy_cost_per_user: get(formInitialValues2,'energy_cost_per_user', ''),
+      task_type: get(formInitialValues2, 'task_type', ''),
+      task_name: get(formInitialValues2, 'task_name', ''),
+      audience: get(formInitialValues2, 'auidence', ''),
+      'Limit Redemptions': get(formInitialValues2, 'Limit Redemptions', ''),
+      star_per_user: get(formInitialValues2, 'star_per_user', ''),
+      description: get(formInitialValues2, 'description', ''),
+      add_tokens_per_user: get(formInitialValues2, 'add_tokens_per_user', ''),
+      energy_cost_per_user: get(formInitialValues2, 'energy_cost_per_user', ''),
       questionsAndAnswers: [
         { 'Survey Question': ' ', 'Question Status': 0, 'Question Answers': new Array(2).fill(' ') }
       ],
@@ -142,14 +140,13 @@ export function GeneralForm({
     },
     onSubmit: async (values, { resetForm }: any) => {
       try {
-  
         const payload = {
           ...values,
           ...auidenceFormData,
-          'Task name': get(formInitialValues2,'task_name',''),
-          'Task type': get(formInitialValues2,'task_type_id', 1),
+          'Task name': get(formInitialValues2, 'task_name', ''),
+          'Task type': get(formInitialValues2, 'task_type_id', 1),
           'Task Status': 0,
-          'Brand Id': get(formInitialValues1,'select_brand_id',''),
+          'Brand Id': get(formInitialValues1, 'select_brand_id', '')
         };
         dispatch(createBrandTask(payload));
         enqueueSnackbar('Task has been created', {
@@ -190,11 +187,11 @@ export function GeneralForm({
   );
 
   const renderTaskName = (heading: any, handleSetHeading: any) => {
-    if (get(values,'task_type') && includes(['Task Type'], heading)) {
-      handleSetHeading(`Task Type - ${get(values,'task_type')}`);
-      return `- ${get(values,'task_type')}`;
+    if (get(values, 'task_type') && includes(['Task Type'], heading)) {
+      handleSetHeading(`Task Type - ${get(values, 'task_type')}`);
+      return `- ${get(values, 'task_type')}`;
     }
-    if (isEmpty(get(values,'task_type'))) {
+    if (isEmpty(get(values, 'task_type'))) {
       handleSetHeading(`Create Task`);
     }
     return false;
@@ -260,7 +257,6 @@ export function GeneralForm({
                     {heading} {renderTaskName(heading, handleSetHeading)}
                   </HeadingStyle>
                   {map(fields, (item: any) => {
-
                     const fieldProps = {
                       ...item,
                       getFieldProps,
@@ -298,13 +294,14 @@ export function GeneralForm({
                     {heading} {renderTaskName(heading, handleSetHeading)}
                   </HeadingStyle>
 
-                  <BrandBonusSection  touched={touched}
-                errors={errors}
-                handleChange={handleChange}
-                values={values}
-                setFieldValue={setFieldValue}
-                handleDrop={handleDrop}
-                />
+                  <BrandBonusSection
+                    touched={touched}
+                    errors={errors}
+                    handleChange={handleChange}
+                    values={values}
+                    setFieldValue={setFieldValue}
+                    handleDrop={handleDrop}
+                  />
                 </SectionStyle>
               );
             }
@@ -358,22 +355,22 @@ export function GeneralForm({
                       handleChange,
                       values,
                       setFieldValue,
-                      handleDrop,
+                      handleDrop
                     };
 
                     return (
                       <CaptainSection
-                          sel
-                          ectedBrand={selectedBrand}
-                          touched={touched}
-                          errors={errors}
-                          handleChange={handleChange}
-                          values={values}
-                          setFieldValue={setFieldValue}
-                          isCaption={item.isCaption}
-                          isPhoto={item.isPhoto}
-                          isVideo={item.isVideo}
-                        />
+                        sel
+                        ectedBrand={selectedBrand}
+                        touched={touched}
+                        errors={errors}
+                        handleChange={handleChange}
+                        values={values}
+                        setFieldValue={setFieldValue}
+                        isCaption={item.isCaption}
+                        isPhoto={item.isPhoto}
+                        isVideo={item.isVideo}
+                      />
                     );
                   })}
                 </SectionStyle>
@@ -460,7 +457,12 @@ export function GeneralForm({
             <NextButtonStyle disabled={activeStep === 0} onClick={handleBack} className="button">
               Back
             </NextButtonStyle>
-            <NextButtonStyle className="button" type="submit" onClick={() => handleSaveNext(values)} disabled={!isEmpty(errors)}>
+            <NextButtonStyle
+              className="button"
+              type="submit"
+              onClick={() => handleSaveNext(values)}
+              disabled={!isEmpty(errors)}
+            >
               Save
             </NextButtonStyle>
 
@@ -478,7 +480,12 @@ export function GeneralForm({
             )}
 
             {activeStep === 2 && (
-              <NextButtonStyle1 variant="contained" color="primary" className="button" type="submit">
+              <NextButtonStyle1
+                variant="contained"
+                color="primary"
+                className="button"
+                type="submit"
+              >
                 Complete Setup
               </NextButtonStyle1>
             )}

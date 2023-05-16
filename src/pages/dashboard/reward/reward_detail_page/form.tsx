@@ -8,16 +8,7 @@ import map from 'lodash/map';
 import size from 'lodash/size';
 import sum from 'lodash/sum';
 // material
-import {
-  Card,
-  Stack,
-  TextField,
-  Typography,
-  Button,
-  MenuItem,
-  CardHeader,
-  CardContent
-} from '@material-ui/core';
+import { Card, Stack, TextField, Typography, Button, MenuItem } from '@material-ui/core';
 // @types
 import { rewardState } from '../../../../@types/reward';
 
@@ -26,7 +17,6 @@ import { useDispatch, useSelector } from '../../../../redux/store';
 import { createRewardTask, createRewardImage } from '../../../../redux/slices/reward';
 import { UploadAvatar } from '../../../../components/upload';
 // utils
-import { fData } from '../../../../utils/formatNumber';
 
 interface Props {
   rewardBrandList: Array<[]>;

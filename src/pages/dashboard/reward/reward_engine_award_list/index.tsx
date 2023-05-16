@@ -43,10 +43,10 @@ const BrandRowWrapper = styled('div')(() => ({
 
 export default function RewardEngineAwardList() {
   const dispatch = useDispatch();
-  const { loading, rewardEngineAwards } = useSelector((state: { reward: rewardState }) => state.reward);
+  const { loading, rewardEngineAwards } = useSelector(
+    (state: { reward: rewardState }) => state.reward
+  );
   const [page, setPageNo] = useState(1);
-
-
 
   useEffect(() => {
     dispatch(getRewardEngineAwardsList({ bonusPageNo: page }));
@@ -79,7 +79,7 @@ export default function RewardEngineAwardList() {
       rewards_award_booster: row.rewards_award_booster,
       rewards_award_card: row.rewards_award_card,
       createdAt: moment(row.created_at).format('MMM DD, YYYY'),
-      updatedAt: moment(row.updatedAt).format('MMM DD, YYYY'),
+      updatedAt: moment(row.updatedAt).format('MMM DD, YYYY')
     }));
 
   const columns: GridColDef[] = [
@@ -140,21 +140,17 @@ export default function RewardEngineAwardList() {
     }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(rewardEngineAwards, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getRewardEngineAwardsList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(rewardEngineAwards, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getRewardEngineAwardsList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <>

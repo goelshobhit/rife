@@ -5,7 +5,6 @@ import { Box, BoxProps } from '@material-ui/core';
 // ----------------------------------------------------------------------
 
 export default function UploadIllustration({ ...other }: BoxProps) {
-  const theme = useTheme();
   return (
     <Box {...other}>
       <svg

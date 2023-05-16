@@ -74,7 +74,7 @@ export default function RewardSettingList() {
       key_value_in_tokens: row.key_value_in_tokens,
       booster_value_in_tokens: row.booster_value_in_tokens,
       rs_created_at: moment(row.bonus_item_qty).format('MMM DD, YYYY'),
-      rs_updated_at: moment(row.bonus_item_remaining_qty).format('MMM DD, YYYY'),
+      rs_updated_at: moment(row.bonus_item_remaining_qty).format('MMM DD, YYYY')
     }));
 
   const columns: GridColDef[] = [
@@ -127,24 +127,20 @@ export default function RewardSettingList() {
       field: 'rs_updated_at',
       headerName: 'Updated At',
       width: 200
-    },
+    }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(rewardSettings, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getRewardSettingList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(rewardSettings, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getRewardSettingList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <>

@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
 import size from 'lodash/size';
 import round from 'lodash/round';
-import moment from 'moment';
 // material
 import {
   Typography,
@@ -14,8 +12,6 @@ import {
   Button,
   Grid,
   Skeleton,
-  Link,
-  Paper,
   Stack,
   Card
 } from '@material-ui/core';
@@ -38,12 +34,10 @@ import { rewardState } from '../../../../@types/reward';
 
 // components
 import { MotionContainer } from '../../../../components/animate';
-import Scrollbar from '../../../../components/Scrollbar';
 import Label from '../../../../components/Label';
 import getVariant from '../../../components-overview/extra/animate/getVariant';
 
 import WithMaterialUIRewardSettingForm from './form';
-
 
 const TextCellWrapperLink = styled(Typography)(() => ({
   fontSize: 14,
@@ -99,7 +93,6 @@ export default function RewardCenterList() {
     dispatch(getRewardCenterList({ bonusPageNo: page }));
     dispatch(getRewardSettingList({ bonusPageNo: page }));
   }, [dispatch, page]);
-
 
   const SkeletonLoad = () => (
     <Grid container spacing={3} sx={{ mt: 2 }}>
@@ -184,7 +177,7 @@ export default function RewardCenterList() {
     {
       field: 'bonus_item_name',
       headerName: 'Name',
-      width: 300,
+      width: 300
     },
     {
       field: 'reward_center_reward_type',
@@ -273,7 +266,12 @@ export default function RewardCenterList() {
           </MotionContainer>
         </Typography>
 
-        <ButtonStyled variant="contained" color="primary" className="button" href="/dashboard/reward/center/add">
+        <ButtonStyled
+          variant="contained"
+          color="primary"
+          className="button"
+          href="/dashboard/reward/center/add"
+        >
           + Add New Reward
         </ButtonStyled>
       </BrandRowWrapper>
@@ -285,14 +283,20 @@ export default function RewardCenterList() {
           <BoxStyle>
             <Typography variant="h6">Reward Settings</Typography>
             <p>
-              {!isEmpty(get(rewardSettings,'data',[])) && <WithMaterialUIRewardSettingForm
-                initialVal={{
-                  booster_value_in_tokens: get(rewardSettings, 'data.[0].booster_value_in_tokens', 100),
-                  key_value_in_tokens: get(rewardSettings, 'data.[0].key_value_in_tokens'),
-                  star_value_in_tokens: get(rewardSettings, 'data.[0].star_value_in_tokens'),
-                  token_value_in_usd: get(rewardSettings, 'data.[0].token_value_in_usd')
-                }}
-              />}
+              {!isEmpty(get(rewardSettings, 'data', [])) && (
+                <WithMaterialUIRewardSettingForm
+                  initialVal={{
+                    booster_value_in_tokens: get(
+                      rewardSettings,
+                      'data.[0].booster_value_in_tokens',
+                      100
+                    ),
+                    key_value_in_tokens: get(rewardSettings, 'data.[0].key_value_in_tokens'),
+                    star_value_in_tokens: get(rewardSettings, 'data.[0].star_value_in_tokens'),
+                    token_value_in_usd: get(rewardSettings, 'data.[0].token_value_in_usd')
+                  }}
+                />
+              )}
             </p>
           </BoxStyle>
           <BoxStyle1>

@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { useFormik, Form, FormikProvider } from 'formik';
-import * as Yup from 'yup';
 import { useSnackbar } from 'notistack5';
 // map
 import map from 'lodash/map';
@@ -15,7 +14,6 @@ import { styled } from '@material-ui/core/styles';
 // redux
 // dynamic fields
 import { getDynamicFields } from '../dynamicFields';
-import { getItem } from '../../../../utils/storage';
 
 const SectionStyle = styled(Card)(({ theme }) => ({
   width: '100%',
@@ -50,9 +48,7 @@ type Props = {
   validationSchema: any;
 };
 
-interface InitialValues {
-
-}
+interface InitialValues {}
 
 const RowStyle = styled('div')(() => ({
   display: 'flex',
@@ -71,8 +67,6 @@ const NextButtonStyle = styled(Button)(({ theme }) => ({
   height: 36
 }));
 
-
-
 export function DynamicFormTypeWatchCampaign({
   fieldJson,
   disabled,
@@ -84,11 +78,10 @@ export function DynamicFormTypeWatchCampaign({
   activeStep,
   handleSaveNext,
   initialValues,
-  validationSchema,
+  validationSchema
 }: Props) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  
   const formik = useFormik<InitialValues>({
     initialValues,
     validationSchema,
@@ -115,11 +108,11 @@ export function DynamicFormTypeWatchCampaign({
   );
 
   const renderTaskName = (heading: any, handleSetHeading: any) => {
-    if (get(values,'task_type') && includes(['Task Type'], heading)) {
-      handleSetHeading(`Task Type - ${get(values,'task_type')}`);
-      return `- ${get(values,'task_type')}`;
+    if (get(values, 'task_type') && includes(['Task Type'], heading)) {
+      handleSetHeading(`Task Type - ${get(values, 'task_type')}`);
+      return `- ${get(values, 'task_type')}`;
     }
-    if (isEmpty(get(values,'task_type'))) {
+    if (isEmpty(get(values, 'task_type'))) {
       handleSetHeading(`Create Task`);
     }
     return false;
@@ -129,7 +122,7 @@ export function DynamicFormTypeWatchCampaign({
 
   const handleSaveData = (values: any) => {
     handleSaveNext(values);
-  }
+  };
 
   return (
     <>
@@ -173,14 +166,9 @@ export function DynamicFormTypeWatchCampaign({
               Save
             </NextButtonStyle>
 
-              <NextButtonStyle
-                variant="contained"
-                color="primary"
-                className="button"
-                type="submit"
-              >
-                Next
-              </NextButtonStyle>
+            <NextButtonStyle variant="contained" color="primary" className="button" type="submit">
+              Next
+            </NextButtonStyle>
           </RowStyle>
         </Form>
       </FormikProvider>

@@ -7,7 +7,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { styled } from '@material-ui/core/styles';
 import { isEmpty, filter, includes } from 'lodash';
 
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
@@ -54,7 +53,7 @@ const ButtonStyle = styled(Button)(() => ({
   borderRadius: '50px',
   color: '#fff',
   borderColor: '#fff',
-  marginBottom: 32,
+  marginBottom: 32
 }));
 
 export default function RewardsSection({
@@ -97,32 +96,31 @@ export default function RewardsSection({
       </RowStyle>
       {isAll && (
         <>
-                        <Grid item sm={6}>
-                  <TextField
-                    fullWidth
-                    name="total_token_budget"
-                    type="number"
-                    label="Total Token Budget"
-                    disabled
-                    value={get(selectedBrand, 'cr_co_total_token')}
-                    InputProps={{
-                      inputProps: {
-                        max: get(selectedBrand, 'cr_co_total_token'),
-                        min: 0
-                      }
-                    }}
-                    InputLabelProps={{
-                      shrink: true
-                    }}
-                    error={Boolean(touched.total_token_budget && errors.total_token_budget)}
-                    helperText={touched.total_token_budget && errors.total_token_budget}
-                  />
-                  <TokenStyle>
-                    {get(selectedBrand, 'cr_co_total_token') -
-                      get(selectedBrand, 'cr_co_token_spent')}{' '}
-                    Tokens Available, View Details
-                  </TokenStyle>
-                </Grid>
+          <Grid item sm={6}>
+            <TextField
+              fullWidth
+              name="total_token_budget"
+              type="number"
+              label="Total Token Budget"
+              disabled
+              value={get(selectedBrand, 'cr_co_total_token')}
+              InputProps={{
+                inputProps: {
+                  max: get(selectedBrand, 'cr_co_total_token'),
+                  min: 0
+                }
+              }}
+              InputLabelProps={{
+                shrink: true
+              }}
+              error={Boolean(touched.total_token_budget && errors.total_token_budget)}
+              helperText={touched.total_token_budget && errors.total_token_budget}
+            />
+            <TokenStyle>
+              {get(selectedBrand, 'cr_co_total_token') - get(selectedBrand, 'cr_co_token_spent')}{' '}
+              Tokens Available, View Details
+            </TokenStyle>
+          </Grid>
           <Grid item sm={12}>
             <TextField
               style={{ width: '100%', margin: 12 }}
@@ -219,20 +217,20 @@ export default function RewardsSection({
                   )}
                 </Grid>
                 <Grid item sm={6}>
-              <TextField
-                style={{ width: '100%', margin: 12 }}
-                name="star_per_user"
-                type="number"
-                label="Star per user"
-                onChange={handleChange}
-                value={values.star_per_user}
-                error={Boolean(touched.star_per_user && errors.star_per_user)}
-                helperText={touched.star_per_user && errors.star_per_user}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
-            </Grid>
+                  <TextField
+                    style={{ width: '100%', margin: 12 }}
+                    name="star_per_user"
+                    type="number"
+                    label="Star per user"
+                    onChange={handleChange}
+                    value={values.star_per_user}
+                    error={Boolean(touched.star_per_user && errors.star_per_user)}
+                    helperText={touched.star_per_user && errors.star_per_user}
+                    InputLabelProps={{
+                      shrink: true
+                    }}
+                  />
+                </Grid>
               </Grid>
             )}
           </Grid>

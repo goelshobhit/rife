@@ -1,24 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useMatch } from 'react-router-dom';
-import queryString from 'querystring';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { styled } from '@material-ui/core/styles';
-import { matchPath } from "react-router";
+import { matchPath } from 'react-router';
 // material
-import { Box, Grid, Skeleton, Typography } from '@material-ui/core';
-import get from 'lodash/get';
+import { Typography } from '@material-ui/core';
 
 import { useDispatch, useSelector } from '../../../../redux/store';
-import { getAllBrands } from '../../../../redux/slices/reward';
-import { getBonusRuleList, getBonusDetail } from '../../../../redux/slices/bonus';
+import { getBonusDetail } from '../../../../redux/slices/bonus';
 // @types,
-import { rewardState } from '../../../../@types/reward';
 import { bonusState } from '../../../../@types/bonus';
 // components
 import Scrollbar from '../../../../components/Scrollbar';
 import LoadingScreen from '../../../../components/LoadingScreen';
 
-
-const RootStyle = styled('div')(({ theme }) => ({
+const RootStyle = styled('div')(() => ({
   flexGrow: 1,
   display: 'flex',
   flexDirection: 'column',
@@ -26,20 +21,20 @@ const RootStyle = styled('div')(({ theme }) => ({
   margin: '0px 32px'
 }));
 
-const HeadingStyle = styled(Typography)(({ theme }) => ({
+const HeadingStyle = styled(Typography)(() => ({
   color: '#232323',
   marginBottom: 32
 }));
 
-export default function RewardList(props: any) {
+export default function RewardList() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const match = matchPath("dashboard/bonus/set/id=:id", location?.pathname)
-  
-  const { loading, bonusRuleList } = useSelector((state: { bonus: bonusState }) => state.bonus);
+  const match = matchPath('dashboard/bonus/set/id=:id', location?.pathname);
+
+  const { loading } = useSelector((state: { bonus: bonusState }) => state.bonus);
 
   useEffect(() => {
-    dispatch(getBonusDetail({ bonusSetId: match?.params?.id }))
+    dispatch(getBonusDetail({ bonusSetId: match?.params?.id }));
   }, []);
 
   return (

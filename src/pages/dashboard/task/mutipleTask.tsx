@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { styled } from '@material-ui/core/styles';
 // lodash
 import get from 'lodash/get';
-import { includes, isEqual, findIndex, isEmpty } from 'lodash';
+import { includes, isEqual, isEmpty } from 'lodash';
 import { Container, Stepper, Step, StepLabel, Box, Typography } from '@material-ui/core';
 import * as Yup from 'yup';
 // components
@@ -60,7 +60,7 @@ export default function MultipleTask() {
   const steps = getSteps();
 
   useEffect(() => {
-    setHeading(get(formData,'task_type'));
+    setHeading(get(formData, 'task_type'));
   }, [formData]);
 
   const handleNext = (data: any) => {
@@ -412,9 +412,13 @@ export default function MultipleTask() {
         {showSteps && (
           <>
             <H1Style>{getItem('task_type_heading')}</H1Style>
-            {!isEmpty(get(auidenceFormData,'task_type')) && !isEmpty(get(auidenceFormData,'audience')) && (<HeadingStyle gutterBottom variant="subtitle1">
-              Task Type - {get(auidenceFormData, 'task_type')} & Auidence Type - {get(auidenceFormData, 'audience', '')}
-            </HeadingStyle>)}
+            {!isEmpty(get(auidenceFormData, 'task_type')) &&
+              !isEmpty(get(auidenceFormData, 'audience')) && (
+                <HeadingStyle gutterBottom variant="subtitle1">
+                  Task Type - {get(auidenceFormData, 'task_type')} & Auidence Type -{' '}
+                  {get(auidenceFormData, 'audience', '')}
+                </HeadingStyle>
+              )}
             <Stepper activeStep={activeStep} alternativeLabel>
               {steps.map((label) => {
                 const stepProps: { completed?: boolean } = {};
