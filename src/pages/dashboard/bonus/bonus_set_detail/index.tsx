@@ -35,7 +35,7 @@ export default function RewardList() {
 
   useEffect(() => {
     dispatch(getBonusDetail({ bonusSetId: match?.params?.id }));
-  }, [dispatch]);
+  }, [dispatch, match]);
 
   return (
     <RootStyle>

@@ -1,10 +1,8 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
 import { useSnackbar } from 'notistack5';
 import { useFormik, Form, FormikProvider } from 'formik';
 // material
-import { styled } from '@material-ui/core/styles';
-import { Grid, Button, TextField, Typography } from '@material-ui/core';
+import { Grid, Button, TextField } from '@material-ui/core';
 
 interface FormValues {
   booster_value_in_tokens: number;
