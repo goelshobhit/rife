@@ -207,32 +207,28 @@ export default function RewardCenterList() {
       field: 'state',
       headerName: 'State',
       width: 200,
-      renderCell: (params) => {
-        return (
-          <Label
-            color={renderColorStatusCode(params.row.stateColor)}
-            sx={{ textTransform: 'capitalize', mx: 'auto' }}
-          >
-            {params.row.state}
-          </Label>
-        );
-      }
+      renderCell: (params) => (
+        <Label
+          color={renderColorStatusCode(params.row.stateColor)}
+          sx={{ textTransform: 'capitalize', mx: 'auto' }}
+        >
+          {params.row.state}
+        </Label>
+      )
     }
   ];
 
-  const CustomPagination = () => {
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(rewardCenter, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getRewardCenterList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(rewardCenter, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getRewardCenterList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <div style={{ margin: 32, height: '100%' }}>

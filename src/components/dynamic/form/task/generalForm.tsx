@@ -250,23 +250,21 @@ export function GeneralForm({
                   <HeadingStyle gutterBottom variant="h4">
                     {heading} {renderTaskName(heading, handleSetHeading)}
                   </HeadingStyle>
-                  {map(fields, (item: any) => {
-                    return (
-                      <RewardsSection
-                        selectedBrand={selectedBrand}
-                        touched={touched}
-                        errors={errors}
-                        handleChange={handleChange}
-                        values={values}
-                        setFieldValue={setFieldValue}
-                        isWatchType={item.isWatchType}
-                        isContestType={item.isContestType}
-                        isStarType={item.isStarType}
-                        isAll={item.isAll}
-                        item={item}
-                      />
-                    );
-                  })}
+                  {map(fields, (item: any) => (
+                    <RewardsSection
+                      selectedBrand={selectedBrand}
+                      touched={touched}
+                      errors={errors}
+                      handleChange={handleChange}
+                      values={values}
+                      setFieldValue={setFieldValue}
+                      isWatchType={item.isWatchType}
+                      isContestType={item.isContestType}
+                      isStarType={item.isStarType}
+                      isAll={item.isAll}
+                      item={item}
+                    />
+                  ))}
                 </SectionStyle>
               );
             }
@@ -296,18 +294,16 @@ export function GeneralForm({
                     {heading} {renderTaskName(heading, handleSetHeading)}
                   </HeadingStyle>
 
-                  {map(fields, (item: any) => {
-                    return (
-                      <BonusSection
-                        selectedBrand={selectedBrand}
-                        touched={touched}
-                        errors={errors}
-                        handleChange={handleChange}
-                        values={values}
-                        setFieldValue={setFieldValue}
-                      />
-                    );
-                  })}
+                  {map(fields, (item: any) => (
+                    <BonusSection
+                      selectedBrand={selectedBrand}
+                      touched={touched}
+                      errors={errors}
+                      handleChange={handleChange}
+                      values={values}
+                      setFieldValue={setFieldValue}
+                    />
+                  ))}
                 </SectionStyle>
               );
             }
@@ -318,22 +314,20 @@ export function GeneralForm({
                   <HeadingStyle gutterBottom variant="h4">
                     {heading} {renderTaskName(heading, handleSetHeading)}
                   </HeadingStyle>
-                  {map(fields, (item: any) => {
-                    return (
-                      <CaptainSection
-                        sel
-                        ectedBrand={selectedBrand}
-                        touched={touched}
-                        errors={errors}
-                        handleChange={handleChange}
-                        values={values}
-                        setFieldValue={setFieldValue}
-                        isCaption={item.isCaption}
-                        isPhoto={item.isPhoto}
-                        isVideo={item.isVideo}
-                      />
-                    );
-                  })}
+                  {map(fields, (item: any) => (
+                    <CaptainSection
+                      sel
+                      ectedBrand={selectedBrand}
+                      touched={touched}
+                      errors={errors}
+                      handleChange={handleChange}
+                      values={values}
+                      setFieldValue={setFieldValue}
+                      isCaption={item.isCaption}
+                      isPhoto={item.isPhoto}
+                      isVideo={item.isVideo}
+                    />
+                  ))}
                 </SectionStyle>
               );
             }

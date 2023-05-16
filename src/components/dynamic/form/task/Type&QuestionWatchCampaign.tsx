@@ -32,11 +32,8 @@ const HeadingStyle = styled(Typography)(() => ({
 type Props = {
   fieldJson: any;
   disabled: boolean;
-  selectedBrand: any;
   handleSetHeading: any;
-  formData: any;
   activeStep: any;
-  handleNext: any;
   handleBack: any;
   handleSaveNext: any;
   initialValues: any;
