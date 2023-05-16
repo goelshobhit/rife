@@ -4,7 +4,7 @@ import concat from 'lodash/concat';
 import map from 'lodash/map';
 import get from 'lodash/get';
 import size from 'lodash/size';
-import { capitalize, sortBy, filter, isEqual, toNumber } from 'lodash';
+import { capitalize, filter, isEqual, toNumber } from 'lodash';
 import { store } from '../store';
 // utils
 import axios from '../../utils/axios';
@@ -23,7 +23,7 @@ const initialState: taskBrandsState = {
   selectedBrandBonus: [],
   selectedBrandBonusLoading: false,
   rewardCenter: [],
-  bonusSet: [],
+  bonusSet: []
 };
 
 const slice = createSlice({
@@ -85,14 +85,12 @@ export function getAllBrands(params: any) {
     const { dispatch } = store;
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(
-        `/brand?pageNumber=${params.brandPageNo}`
-      );
+      const response = await axios.get(`/brand?pageNumber=${params.brandPageNo}`);
       if (size(get(response, 'data.data', [])) < 10) {
         dispatch(slice.actions.handleHasMore());
       }
       const getBrandName = map(get(response, 'data.data', []), (item: any) => {
-        const data = { name: capitalize(item.cr_co_name), ...item, };
+        const data = { name: capitalize(item.cr_co_name), ...item };
         return data;
       });
       dispatch(slice.actions.getTaskBrandSuccess(getBrandName));
@@ -136,7 +134,8 @@ const flattenObj = (ob: any) => {
   return result;
 };
 
-const handleFlattenNestedObjectOfArray = (array: any) => map(array, (item: any, index: number) => flattenObj(item));
+const handleFlattenNestedObjectOfArray = (array: any) =>
+  map(array, (item: any, index: number) => flattenObj(item));
 
 export function getListTask(params: any) {
   return async () => {
@@ -161,7 +160,6 @@ export function getListTask(params: any) {
   };
 }
 
-
 export function getContestListTask(params: any) {
   return async () => {
     const { dispatch } = store;
@@ -171,8 +169,13 @@ export function getContestListTask(params: any) {
         `/tasks_list/?isAdmin=1&pageNumber=${params.brandPageNo}&pageSize=10`
       );
 
-      const filterQuestionsResponse = filter(response.data.data, (item: any) => isEqual(toNumber(item.task_data.media_type), 1) || isEqual(toNumber(item.task_data.media_type), 2));
-    
+      const filterQuestionsResponse = filter(
+        response.data.data,
+        (item: any) =>
+          isEqual(toNumber(item.task_data.media_type), 1) ||
+          isEqual(toNumber(item.task_data.media_type), 2)
+      );
+
       dispatch(
         slice.actions.getTaskList({
           data: handleFlattenNestedObjectOfArray(filterQuestionsResponse),
@@ -197,7 +200,9 @@ export function getWatchListTask(params: any) {
         `/tasks_list/?isAdmin=1&pageNumber=${params.brandPageNo}&pageSize=10`
       );
 
-      const filterQuestionsResponse = filter(response.data.data, (item: any) => isEqual(toNumber(item.task_data.ta_type), 1));
+      const filterQuestionsResponse = filter(response.data.data, (item: any) =>
+        isEqual(toNumber(item.task_data.ta_type), 1)
+      );
 
       dispatch(
         slice.actions.getTaskList({
@@ -219,12 +224,12 @@ export function getQuestionListTask(params: any) {
     const { dispatch } = store;
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(
-        `/tasks_list/?isAdmin=1&pageNumber=${params.brandPageNo}`
+      const response = await axios.get(`/tasks_list/?isAdmin=1&pageNumber=${params.brandPageNo}`);
+
+      const filterQuestionsResponse = filter(response.data.data, (item: any) =>
+        isEqual(toNumber(item.task_data.ta_type), 1)
       );
 
-      const filterQuestionsResponse = filter(response.data.data, (item: any) => isEqual(toNumber(item.task_data.ta_type), 1));
-    
       dispatch(
         slice.actions.getTaskList({
           data: handleFlattenNestedObjectOfArray(filterQuestionsResponse),
@@ -245,12 +250,8 @@ export function getSelectedBrandBonus(params: any) {
     const { dispatch } = store;
     dispatch(slice.actions.getSelectedBrandBonus());
     try {
-      const response = await axios.get(
-        `/bonus_item?brandId=${params.brandId}`
-      );
-      dispatch(
-        slice.actions.getSelectedBrandBonusSuccess(response.data.data[0])
-      );
+      const response = await axios.get(`/bonus_item?brandId=${params.brandId}`);
+      dispatch(slice.actions.getSelectedBrandBonusSuccess(response.data.data[0]));
     } catch (error) {
       // console.log(error);
       // do nothing
@@ -262,12 +263,8 @@ export function getRewards() {
   return async () => {
     const { dispatch } = store;
     try {
-      const response = await axios.get(
-        `/reward_center`
-      );
-      dispatch(
-        slice.actions.getRewardsSuccess(response.data.data)
-      );
+      const response = await axios.get(`/reward_center`);
+      dispatch(slice.actions.getRewardsSuccess(response.data.data));
     } catch (error) {
       // console.log(error);
       // do nothing
@@ -275,13 +272,12 @@ export function getRewards() {
   };
 }
 
-
 export function createBrandTask(params: any) {
   return async () => {
     try {
       await axios.post('/tasks', {
-        ...params,
-      })
+        ...params
+      });
     } catch (error) {
       // console.log(error);
       // do nothing
@@ -293,16 +289,11 @@ export function getBonusSet() {
   return async () => {
     const { dispatch } = store;
     try {
-      const response = await axios.get(
-        '/bonus_set/?pageNumber=1'
-      );
-      dispatch(
-        slice.actions.getBonusSetSuccess(response.data.data)
-      );
+      const response = await axios.get('/bonus_set/?pageNumber=1');
+      dispatch(slice.actions.getBonusSetSuccess(response.data.data));
     } catch (error) {
       // console.log(error);
       // do nothing
     }
   };
 }
-

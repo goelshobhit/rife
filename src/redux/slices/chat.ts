@@ -144,7 +144,7 @@ export function getContacts() {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
-      const response = { data: { contacts: MY_CONTACT }};
+      const response = { data: { contacts: MY_CONTACT } };
       dispatch(slice.actions.getContactsSuccess(response.data.contacts));
     } catch (error) {
       dispatch(slice.actions.hasError(error));

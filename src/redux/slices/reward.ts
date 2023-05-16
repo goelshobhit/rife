@@ -23,7 +23,7 @@ const initialState: rewardState = {
   rewardBrandList: [],
   hasMoreBrands: true,
   brandPageNo: 1,
-  rewardCenterImage: null,
+  rewardCenterImage: null
 };
 
 const slice = createSlice({
@@ -210,7 +210,9 @@ export function getRewardEngineRewardsList(params: any) {
     const { dispatch } = store;
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(`rewards-engine/reward_listing/?pageNumber=${params.bonusPageNo}`);
+      const response = await axios.get(
+        `rewards-engine/reward_listing/?pageNumber=${params.bonusPageNo}`
+      );
       dispatch(slice.actions.stopLoading());
       dispatch(
         slice.actions.rewardEngineRewardsListSuccess({
@@ -230,7 +232,9 @@ export function getRewardEngineRequestsList(params: any) {
     const { dispatch } = store;
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(`rewards-engine/request_rewards/?pageNumber=${params.bonusPageNo}`);
+      const response = await axios.get(
+        `rewards-engine/request_rewards/?pageNumber=${params.bonusPageNo}`
+      );
       dispatch(slice.actions.stopLoading());
       dispatch(
         slice.actions.rewardEngineRequestsListSuccess({
@@ -245,20 +249,17 @@ export function getRewardEngineRequestsList(params: any) {
   };
 }
 
-
 export function getAllBrands(params: any) {
   return async () => {
     const { dispatch } = store;
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(
-        `/brand?pageNumber=${params.brandPageNo}`
-      );
+      const response = await axios.get(`/brand?pageNumber=${params.brandPageNo}`);
       if (size(get(response, 'data.data', [])) < 10) {
         dispatch(slice.actions.handleHasMore());
       }
       const getBrandName = map(get(response, 'data.data', []), (item: any) => {
-        const data = { name: capitalize(item.cr_co_name), ...item, };
+        const data = { name: capitalize(item.cr_co_name), ...item };
         return data;
       });
       dispatch(slice.actions.getTaskBrandSuccess(getBrandName));
@@ -275,9 +276,7 @@ export function createRewardTask(params: any) {
     const { dispatch } = store;
     dispatch(slice.actions.startLoading());
     try {
-      await axios.post(
-       'reward_center', { ...params }
-      );
+      await axios.post('reward_center', { ...params });
       dispatch(slice.actions.stopLoading());
     } catch (error) {
       // console.log(error);
@@ -290,11 +289,12 @@ export function createRewardImage(params: any) {
   return async () => {
     const { dispatch } = store;
     try {
-     const response =  await axios.post(
-       'images-upload', params, { headers: {
-        'content-type': 'multipart/form-data'
-       }});
-      dispatch(slice.actions.rewardCenterImage(response.data.data[0].image_url))
+      const response = await axios.post('images-upload', params, {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      });
+      dispatch(slice.actions.rewardCenterImage(response.data.data[0].image_url));
     } catch (error) {
       // console.log(error);
       // do nothing
