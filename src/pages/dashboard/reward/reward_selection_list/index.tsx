@@ -64,19 +64,17 @@ export default function RewardSelectionList() {
     }
   ];
 
-  const CustomPagination = () => {
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(rewardSelections, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getRewardSelectionList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(rewardSelections, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getRewardSelectionList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <>
