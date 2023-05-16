@@ -58,9 +58,9 @@ export default function MultipleTask() {
   const [showSteps, setShowSteps] = useState(false);
   const [heading, setHeading] = useState('Create Task');
   const steps = getSteps();
+  console.log(heading);
 
   useEffect(() => {
-    console.log(heading);
     setHeading(get(formData, 'task_type'));
   }, [formData]);
 
