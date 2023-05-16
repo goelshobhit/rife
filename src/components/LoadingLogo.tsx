@@ -1,5 +1,4 @@
 // material
-import { useTheme } from '@material-ui/core/styles';
 import { Box } from '@material-ui/core';
 
 // ----------------------------------------------------------------------

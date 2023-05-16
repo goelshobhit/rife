@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
 // material
-import { Typography, Box, Pagination, Button, Grid, Skeleton } from '@material-ui/core';
+import { Box, Pagination, Button, Grid, Skeleton } from '@material-ui/core';
 
 import { DataGrid, GridColDef, GridToolbar } from '@material-ui/data-grid';
 // utils

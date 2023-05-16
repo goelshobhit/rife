@@ -60,6 +60,7 @@ export default function MultipleTask() {
   const steps = getSteps();
 
   useEffect(() => {
+    console.log(heading);
     setHeading(get(formData, 'task_type'));
   }, [formData]);
 

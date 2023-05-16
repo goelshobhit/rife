@@ -5,8 +5,6 @@ import { styled } from '@material-ui/core/styles';
 import { Box, Card, Stack, Link, Container, Typography } from '@material-ui/core';
 // routes
 import { PATH_AUTH } from '../../routes/paths';
-// hooks
-import useAuth from '../../hooks/useAuth';
 // layouts
 import AuthLayout from '../../layouts/AuthLayout';
 // components
