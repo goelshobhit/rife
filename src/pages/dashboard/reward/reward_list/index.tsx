@@ -72,7 +72,7 @@ export default function RewardList() {
       rewardFreq: row.reward_center_dist_one_freq,
       rewardToken: row.reward_center_dist_one_total_token,
       rewardCreatedAt: moment(row.reward_center_dist_created_at).format('MMM DD, YYYY'),
-      rewardUpdatedAt: moment(row.reward_center_dist_updated_at).format('MMM DD, YYYY'),
+      rewardUpdatedAt: moment(row.reward_center_dist_updated_at).format('MMM DD, YYYY')
     }));
 
   const columns: GridColDef[] = [
@@ -90,9 +90,7 @@ export default function RewardList() {
           variant="body2"
           component={RouterLink}
         >
-          <TextCellWrapperLink variant="subtitle1">
-            {params.row.rewardName}
-          </TextCellWrapperLink>
+          <TextCellWrapperLink variant="subtitle1">{params.row.rewardName}</TextCellWrapperLink>
         </Link>
       )
     },
@@ -115,24 +113,20 @@ export default function RewardList() {
       field: 'rewardCreatedAt',
       headerName: 'Reward Created At',
       width: 200
-    },
+    }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(rewardList, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getRewardList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(rewardList, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getRewardList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <>

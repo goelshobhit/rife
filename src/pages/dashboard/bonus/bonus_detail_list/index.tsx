@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { styled } from '@material-ui/core/styles';
 // material
-import { Box, Grid, Skeleton, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 import { useDispatch, useSelector } from '../../../../redux/store';
 import { getAllBrands, getRewardSettingList } from '../../../../redux/slices/reward';
@@ -35,8 +35,8 @@ export default function RewardList() {
   const [page, setPageNo] = useState(brandPageNo);
 
   useEffect(() => {
-    dispatch(getRewardSettingList({ bonusPageNo: 1}));
-  },[]);
+    dispatch(getRewardSettingList({ bonusPageNo: 1 }));
+  }, []);
   useEffect(() => {
     if (hasMoreBrands) {
       dispatch(getAllBrands({ brandPageNo: page }));

@@ -15,7 +15,6 @@ import { styled } from '@material-ui/core/styles';
 // redux
 // dynamic fields
 import { getDynamicFields } from '../dynamicFields';
-import { getItem } from '../../../../utils/storage';
 
 const SectionStyle = styled(Card)(({ theme }) => ({
   width: '100%',
@@ -76,7 +75,7 @@ const NextButtonStyle = styled(Button)(({ theme }) => ({
 
 const TaskValidationSchema = Yup.object().shape({
   task_type: Yup.string().required('Required'),
-  task_name: Yup.string().min(3, "Min length should be 4 ").required('Required'),
+  task_name: Yup.string().min(3, 'Min length should be 4 ').required('Required'),
   audience: Yup.string().required('Required'),
   energy_cost_per_user: Yup.string().required('Required')
 });
@@ -92,7 +91,7 @@ export function DynamicFormForAuidence({
   activeStep,
   handleSaveNext,
   initialValues,
-  validationSchema,
+  validationSchema
 }: Props) {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -100,10 +99,10 @@ export function DynamicFormForAuidence({
 
   const formik = useFormik<InitialValues>({
     initialValues: {
-      task_type: get(formInitialValues,'task_type', ''),
-      task_name: get(formInitialValues,'task_name', ''),
-      audience: get(formInitialValues,'audience', ''),
-      energy_cost_per_user: get(formInitialValues,'energy_cost_per_user', '')
+      task_type: get(formInitialValues, 'task_type', ''),
+      task_name: get(formInitialValues, 'task_name', ''),
+      audience: get(formInitialValues, 'audience', ''),
+      energy_cost_per_user: get(formInitialValues, 'energy_cost_per_user', '')
     },
     validationSchema,
     onSubmit: async (values, { resetForm }: any) => {
@@ -129,11 +128,11 @@ export function DynamicFormForAuidence({
   );
 
   const renderTaskName = (heading: any, handleSetHeading: any) => {
-    if (get(values,'task_type') && includes(['Task Type'], heading)) {
-      handleSetHeading(`Task Type - ${get(values,'task_type')}`);
-      return `- ${get(values,'task_type')}`;
+    if (get(values, 'task_type') && includes(['Task Type'], heading)) {
+      handleSetHeading(`Task Type - ${get(values, 'task_type')}`);
+      return `- ${get(values, 'task_type')}`;
     }
-    if (isEmpty(get(values,'task_type'))) {
+    if (isEmpty(get(values, 'task_type'))) {
       handleSetHeading(`Create Task`);
     }
     return false;
@@ -143,8 +142,8 @@ export function DynamicFormForAuidence({
 
   const handleSaveData = (values: any) => {
     handleSaveNext(values);
-  }
-  
+  };
+
   return (
     <>
       <FormikProvider value={formik}>
@@ -183,18 +182,12 @@ export function DynamicFormForAuidence({
             <NextButtonStyle disabled={activeStep === 0} onClick={handleBack} className="button">
               Back
             </NextButtonStyle>
-            <NextButtonStyle className="button" type="submit" 
-            >
+            <NextButtonStyle className="button" type="submit">
               Save
             </NextButtonStyle>
 
             {activeStep === 1 && (
-              <NextButtonStyle
-                variant="contained"
-                color="primary"
-                className="button"
-                type="submit"
-              >
+              <NextButtonStyle variant="contained" color="primary" className="button" type="submit">
                 Next
               </NextButtonStyle>
             )}

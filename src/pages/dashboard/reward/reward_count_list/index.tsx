@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
 // material
-import { Typography, Box, Pagination, Button, Grid, Skeleton, Link } from '@material-ui/core';
+import { Typography, Box, Pagination, Button, Grid, Skeleton } from '@material-ui/core';
 
 import {
   useGridSlotComponentProps,
@@ -85,8 +84,7 @@ export default function RewardCountList() {
       field: 'brandName',
       headerName: 'Reward Count',
       width: 200
-    },
-
+    }
   ];
 
   const CustomPagination = () => {

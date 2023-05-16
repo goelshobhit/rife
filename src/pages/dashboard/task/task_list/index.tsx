@@ -344,21 +344,17 @@ export default function BonusList() {
     }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(taskListTotal / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getListTask({ brandPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(taskListTotal / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getListTask({ brandPageNo: value }));
+      }}
+    />
+  );
 
   const navigate = useNavigate();
 
@@ -381,7 +377,7 @@ export default function BonusList() {
           variant="contained"
           color="primary"
           className="button"
-          onClick={() => navigate("/dashboard/task/create")}
+          onClick={() => navigate('/dashboard/task/create')}
         >
           {' '}
           + Add New Task

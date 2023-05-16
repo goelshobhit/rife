@@ -7,12 +7,12 @@ import get from 'lodash/get';
 import size from 'lodash/size';
 import { TrashIcon, AddIcon } from '../../../../assets';
 
-const SectionStyle = styled('div')(({ theme }) => ({
+const SectionStyle = styled('div')(() => ({
   width: '100%',
   maxWidth: '100%',
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'flex-end',
+  alignItems: 'flex-end'
 }));
 
 const QuestionStyle = styled('div')(({ theme }) => ({
@@ -32,7 +32,7 @@ const DividerStyle = styled(Divider)(({ theme }) => ({
   flexGrow: 0
 }));
 
-const RowStyle = styled('div')(({ theme }) => ({
+const RowStyle = styled('div')(() => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -41,7 +41,7 @@ const RowStyle = styled('div')(({ theme }) => ({
   margin: '16px 10px'
 }));
 
-const AnsRowStyle = styled('div')(({ theme }) => ({
+const AnsRowStyle = styled('div')(() => ({
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
@@ -59,8 +59,8 @@ const AnswersFieldArray = ({ questionItem, name }: any) => (
     name={name}
     render={(arrayHelpers) => (
       <div style={{ width: '100%' }}>
-        {get(questionItem,'Question Answers').length ? (
-          get(questionItem,'Question Answers').map((color: any, index: number) => (
+        {get(questionItem, 'Question Answers').length ? (
+          get(questionItem, 'Question Answers').map((color: any, index: number) => (
             <div key={index} style={{ width: '100%' }}>
               <AnsRowStyle>
                 <Field
@@ -70,21 +70,21 @@ const AnswersFieldArray = ({ questionItem, name }: any) => (
                 />
                 {index === size(get(questionItem, 'Question Answers', [])) - 1 ? (
                   <Button
-                  variant="outlined"
-                  className="button"
-                  color="info"
+                    variant="outlined"
+                    className="button"
+                    color="info"
                     disabled={size(get(questionItem, 'Question Answers', [])) > 5}
                     onClick={() => {
-                      arrayHelpers.insert(size(get(questionItem,'Question Answers')), '');
+                      arrayHelpers.insert(size(get(questionItem, 'Question Answers')), '');
                     }}
                   >
                     <AddIcon />
                   </Button>
                 ) : (
                   <Button
-                  variant="outlined"
-                  color="info"
-                  className="button"
+                    variant="outlined"
+                    color="info"
+                    className="button"
                     disabled={size(get(questionItem, 'Question Answers', [])) < 3}
                     onClick={() => {
                       arrayHelpers.remove(index);
@@ -110,8 +110,7 @@ export const DynamicQuestionsAndAnswers = (props: any) => {
       values: { questionsAndAnswers },
       handleChange
     },
-    insert,
-    disabledz
+    insert
   } = props;
 
   return (
@@ -122,14 +121,18 @@ export const DynamicQuestionsAndAnswers = (props: any) => {
         className="button"
         disabled={size(questionsAndAnswers) > 5}
         onClick={() =>
-          insert(size(questionsAndAnswers) + 1, {'Survey Question': ' ',  "Question Status": 0,'Question Answers': new Array(2).fill(' ') })
+          insert(size(questionsAndAnswers) + 1, {
+            'Survey Question': ' ',
+            'Question Status': 0,
+            'Question Answers': new Array(2).fill(' ')
+          })
         }
       >
         + Add New
       </Button>
       <FieldArray
         name="questionsAndAnswers"
-        render={(arrayHelpers) =>
+        render={() =>
           map(questionsAndAnswers, (item: any, index: number) => (
             <div key={index} style={{ width: '100%' }}>
               {index !== 0 && <DividerStyle />}

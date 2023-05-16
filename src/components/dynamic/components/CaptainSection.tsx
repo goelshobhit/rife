@@ -7,10 +7,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-import { Field, FieldArray } from 'formik';
+import { FieldArray } from 'formik';
 import { styled } from '@material-ui/core/styles';
 import map from 'lodash/map';
-import get from 'lodash/get';
 import size from 'lodash/size';
 import isEmpty from 'lodash/isEmpty';
 import { TrashIcon, AddIcon } from '../../../assets';

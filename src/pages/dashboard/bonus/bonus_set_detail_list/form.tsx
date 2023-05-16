@@ -10,7 +10,7 @@ import get from 'lodash/get';
 import { Card, Stack, TextField, Button, MenuItem, Typography, Switch } from '@material-ui/core';
 // @types
 
-import { DatePicker} from '@material-ui/lab';
+import { DatePicker } from '@material-ui/lab';
 
 import { useDispatch } from '../../../../redux/store';
 import { createBonusSet, getBonusSetList } from '../../../../redux/slices/bonus';
@@ -60,7 +60,7 @@ export default function RewardNewForm({ rewardBrandList, bonusRuleList }: Props)
           'Bonus Set Default': values.isDefault ? 1 : 0,
           'Bonus Set Item Timestamp': moment(values.end_date).toISOString(),
           'Bonus Set Status': values.isActive,
-          'Bonus Set Duration': moment(values.end_date).diff(moment(values.start_date),'days'),
+          'Bonus Set Duration': moment(values.end_date).diff(moment(values.start_date), 'days'),
           'Bonus Rule Ids': [values.rule]
         };
 

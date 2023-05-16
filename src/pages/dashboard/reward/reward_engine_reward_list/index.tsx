@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
 // material
-import { Typography, Box, Pagination, Button, Grid, Skeleton, Link } from '@material-ui/core';
+import { Typography, Box, Pagination, Button, Grid, Skeleton } from '@material-ui/core';
 
 import {
   useGridSlotComponentProps,
@@ -42,7 +41,9 @@ const BrandRowWrapper = styled('div')(() => ({
 
 export default function RewardEngineRewardList() {
   const dispatch = useDispatch();
-  const { loading, rewardEngineRewards } = useSelector((state: { reward: rewardState }) => state.reward);
+  const { loading, rewardEngineRewards } = useSelector(
+    (state: { reward: rewardState }) => state.reward
+  );
   const [page, setPageNo] = useState(1);
 
   useEffect(() => {
@@ -67,13 +68,13 @@ export default function RewardEngineRewardList() {
     rows.map((row: any) => ({
       id: row.bonus_item_id,
       bonus_item_brand_id: row.bonus_item_brand_id,
-      bonus_item_name: row.bonus_item_name,
+      bonus_item_name: row.bonus_item_name
     }));
 
   const columns: GridColDef[] = [
     {
       field: 'id'
-    },
+    }
   ];
 
   const CustomPagination = () => {

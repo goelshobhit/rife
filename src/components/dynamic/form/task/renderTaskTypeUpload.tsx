@@ -19,11 +19,7 @@ const SectionStyle = styled('div')(({ theme }) => ({
   paddingLeft: 8
 }));
 
-const HeadingStyle = styled(Typography)(() => ({
-  paddingBottom: 14
-}));
-
-const SmallStyle = styled('small')(({ theme }) => ({
+const SmallStyle = styled('small')(() => ({
   width: '100%',
   fontSize: 12,
   color: '#E02D69',
@@ -78,82 +74,6 @@ export default function RenderTaskTypeUpload(props: any) {
           <SmallStyle> Max 42 characters</SmallStyle>
         </Grid>
       </Grid>
-    </>
-  );
-
-  const ImageTask = () => (
-    <>
-      <Alert severity="info" style={{ marginBottom: 24 }}>
-        This task includes a image a and text
-      </Alert>
-      <UploadSingleFile
-        maxSize={3145728}
-        accept="image/*"
-        onDrop={handleDrop}
-        file={values.cover}
-        desc="Add Single Image"
-      />
-      <TextField
-        name="Description Title"
-        fullWidth
-        type="text"
-        label="Description Title"
-        variant="outlined"
-        style={{ marginTop: 15, marginBottom: 5 }}
-      />
-
-      <TextField
-        name="Creator Username"
-        fullWidth
-        type="text"
-        label="Creator Username"
-        variant="outlined"
-        style={{ marginTop: 5, marginBottom: 5 }}
-      />
-
-      <TextField
-        name="Description"
-        fullWidth
-        type="text"
-        label="Description"
-        variant="outlined"
-        style={{ marginTop: 5, marginBottom: 5 }}
-      />
-    </>
-  );
-
-  const TierVideo = () => (
-    <>
-      <UploadSingleFile
-        maxSize={3145728}
-        accept="image/*"
-        onDrop={handleDrop}
-        file={values.cover}
-        desc="Add Single Image or Video"
-      />
-    </>
-  );
-
-  const AudienceTask = () => (
-    <>
-      <Alert severity="info" style={{ marginBottom: 24 }}>
-        This audience inclues inspo images or videos (min 4 - max 8)
-      </Alert>
-      <UploadAuidenceFile
-        maxSize={3145728}
-        accept="image/*"
-        onDrop={handleDrop}
-        file={values.cover}
-        desc="Add Single Image or Video"
-      />
-      <TextField
-        name="Title above Content "
-        fullWidth
-        type="text"
-        label="Title above Content "
-        variant="outlined"
-        style={{ marginTop: 15, marginBottom: 5 }}
-      />
     </>
   );
 
@@ -233,14 +153,13 @@ export default function RenderTaskTypeUpload(props: any) {
   const PublicCaptionThis = () => (
     <>
       <div style={{ marginBottom: 24 }}>
-
-      <UploadSingleFile
-        maxSize={3145728}
-        accept="image/*"
-        onDrop={handleDrop}
-        file={values.cover}
-        desc="Add Single Image or Video"
-      />
+        <UploadSingleFile
+          maxSize={3145728}
+          accept="image/*"
+          onDrop={handleDrop}
+          file={values.cover}
+          desc="Add Single Image or Video"
+        />
       </div>
       <Grid container spacing={3}>
         <Grid item xs={6}>
@@ -290,22 +209,11 @@ export default function RenderTaskTypeUpload(props: any) {
 
   return (
     <SectionStyle>
-      {includes(['Video'], props.task) && (
-        <PublicVideo />
-      )}
-      {includes(['Image'], props.task)  && (
-        <PublicVideo />
-      )}
-      {includes(['Video Response'], props.task) && (
-        <VideoResponseTask />
-      )}
-      {includes(['Caption this'], props.task)  && (
-        <PublicCaptionThis />
-      )}
-      {includes(['Sound'], props.task)  && (
-        <SoundResponseTask />
-      )}
-
+      {includes(['Video'], props.task) && <PublicVideo />}
+      {includes(['Image'], props.task) && <PublicVideo />}
+      {includes(['Video Response'], props.task) && <VideoResponseTask />}
+      {includes(['Caption this'], props.task) && <PublicCaptionThis />}
+      {includes(['Sound'], props.task) && <SoundResponseTask />}
     </SectionStyle>
   );
 }

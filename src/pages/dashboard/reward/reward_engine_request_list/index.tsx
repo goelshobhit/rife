@@ -43,7 +43,9 @@ const BrandRowWrapper = styled('div')(() => ({
 
 export default function RewardEngineRequestList() {
   const dispatch = useDispatch();
-  const { loading, rewardEngineRequests } = useSelector((state: { reward: rewardState }) => state.reward);
+  const { loading, rewardEngineRequests } = useSelector(
+    (state: { reward: rewardState }) => state.reward
+  );
   const [page, setPageNo] = useState(1);
 
   useEffect(() => {
@@ -64,7 +66,6 @@ export default function RewardEngineRequestList() {
     </Grid>
   );
 
-
   const mapDataToTargetStructure = (rows: any) =>
     rows.map((row: any) => ({
       id: row.rewards_request_id,
@@ -77,7 +78,7 @@ export default function RewardEngineRequestList() {
       rewards_request_booster: row.rewards_request_booster,
       rewards_request_card: row.rewards_request_card,
       createdAt: moment(row.created_at).format('MMM DD, YYYY'),
-      updatedAt: moment(row.updated_at).format('MMM DD, YYYY'),
+      updatedAt: moment(row.updated_at).format('MMM DD, YYYY')
     }));
 
   const columns: GridColDef[] = [
@@ -140,24 +141,20 @@ export default function RewardEngineRequestList() {
       field: 'updatedAt',
       headerName: 'updated at',
       width: 200
-    },
+    }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(rewardEngineRequests, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getRewardEngineRequestsList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(rewardEngineRequests, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getRewardEngineRequestsList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <>

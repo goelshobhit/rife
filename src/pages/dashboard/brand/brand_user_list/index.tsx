@@ -42,7 +42,9 @@ const BrandRowWrapper = styled('div')(() => ({
 
 export default function BonusList() {
   const dispatch = useDispatch();
-  const { loading, brand_user_share_list } = useSelector((state: { brand: brandState }) => state.brand);
+  const { loading, brand_user_share_list } = useSelector(
+    (state: { brand: brandState }) => state.brand
+  );
   const [page, setPageNo] = useState(1);
 
   useEffect(() => {
@@ -67,7 +69,7 @@ export default function BonusList() {
     rows.map((row: any) => ({
       id: row.bonus_item_id,
       bonus_item_brand_id: row.bonus_item_brand_id,
-      bonus_item_name: row.bonus_item_name,
+      bonus_item_name: row.bonus_item_name
     }));
 
   const columns: GridColDef[] = [
@@ -90,24 +92,20 @@ export default function BonusList() {
           </TextCellWrapperLink>
         </Link>
       )
-    },
+    }
   ];
 
-  const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
-    return (
-      <Pagination
-        color="primary"
-        count={Math.ceil(get(brand_user_share_list, 'totalRecords') / 10)}
-        page={page}
-        onChange={(event, value) => {
-          setPageNo(value);
-          dispatch(getBrandUserShareList({ bonusPageNo: value }));
-        }}
-      />
-    );
-  };
+  const CustomPagination = () => (
+    <Pagination
+      color="primary"
+      count={Math.ceil(get(brand_user_share_list, 'totalRecords') / 10)}
+      page={page}
+      onChange={(event, value) => {
+        setPageNo(value);
+        dispatch(getBrandUserShareList({ bonusPageNo: value }));
+      }}
+    />
+  );
 
   return (
     <>
