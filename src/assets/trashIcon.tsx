@@ -1,0 +1,34 @@
+export default function TrashIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M3 6.59961H5H21"
+        stroke="#E02D69"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8 6.6V4.8C8 4.32261 8.21071 3.86477 8.58579 3.52721C8.96086 3.18964 9.46957 3 10 3H14C14.5304 3 15.0391 3.18964 15.4142 3.52721C15.7893 3.86477 16 4.32261 16 4.8V6.6M19 6.6V19.2C19 19.6774 18.7893 20.1352 18.4142 20.4728C18.0391 20.8104 17.5304 21 17 21H7C6.46957 21 5.96086 20.8104 5.58579 20.4728C5.21071 20.1352 5 19.6774 5 19.2V6.6H19Z"
+        stroke="#E02D69"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M14 11.0996V16.4996"
+        stroke="#E02D69"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 11.0996V16.4996"
+        stroke="#E02D69"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}

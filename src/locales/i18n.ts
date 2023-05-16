@@ -1,38 +1,30 @@
-import i18next from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import { initReactI18next } from 'react-i18next';
+//
+import enLocales from './en.json';
+import deLocales from './de.json';
+import frLocales from './fr.json';
 
-import en from './en/translation.json';
-import de from './de/translation.json';
-import { convertLanguageJsonToObject } from './translations';
+// ----------------------------------------------------------------------
 
-export const translationsJson = {
-  en: {
-    translation: en,
-  },
-  de: {
-    translation: de,
-  },
-};
-
-// Create the 'translations' object to provide full intellisense support for the static json files.
-convertLanguageJsonToObject(en);
-
-export const i18n = i18next
-  // pass the i18n instance to react-i18next.
-  .use(initReactI18next)
-  // detect user language
-  // learn more: https://github.com/i18next/i18next-browser-languageDetector
+i18n
   .use(LanguageDetector)
-  // init i18next
-  // for all options read: https://www.i18next.com/overview/configuration-options
+  .use(initReactI18next)
   .init({
-    resources: translationsJson,
-    fallbackLng: 'en',
-    debug:
-      process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test',
-
-    interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
+    resources: {
+      en: { translations: enLocales },
+      de: { translations: deLocales },
+      fr: { translations: frLocales }
     },
+    lng: localStorage.getItem('i18nextLng') || 'en',
+    fallbackLng: 'en',
+    debug: false,
+    ns: ['translations'],
+    defaultNS: 'translations',
+    interpolation: {
+      escapeValue: false
+    }
   });
+
+export default i18n;
