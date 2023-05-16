@@ -30,11 +30,6 @@ const HeadingStyle = styled(Typography)(() => ({
   paddingBottom: 14
 }));
 
-const EndDateDisabledStyle = styled(TextField)(() => ({
-  transform: 'translate(20px, 38px)',
-  width: '48%'
-}));
-
 type Props = {
   fieldJson: any;
   disabled: boolean;
@@ -63,7 +58,7 @@ const RowStyle = styled('div')(() => ({
   marginTop: 58
 }));
 
-const NextButtonStyle = styled(Button)(({ theme }) => ({
+const NextButtonStyle = styled(Button)(() => ({
   borderColor: 'inherit',
   borderRadius: 23,
   padding: '6px 16px 6px 16px',
@@ -73,28 +68,16 @@ const NextButtonStyle = styled(Button)(({ theme }) => ({
   height: 36
 }));
 
-const TaskValidationSchema = Yup.object().shape({
-  task_type: Yup.string().required('Required'),
-  task_name: Yup.string().min(3, 'Min length should be 4 ').required('Required'),
-  audience: Yup.string().required('Required'),
-  energy_cost_per_user: Yup.string().required('Required')
-});
-
 export function DynamicFormForAuidence({
   fieldJson,
   disabled,
-  selectedBrand,
   handleSetHeading,
-  formData,
-  handleNext,
   handleBack,
   activeStep,
   handleSaveNext,
   initialValues,
   validationSchema
 }: Props) {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
   const formInitialValues = initialValues;
 
   const formik = useFormik<InitialValues>({
@@ -105,7 +88,7 @@ export function DynamicFormForAuidence({
       energy_cost_per_user: get(formInitialValues, 'energy_cost_per_user', '')
     },
     validationSchema,
-    onSubmit: async (values, { resetForm }: any) => {
+    onSubmit: async (values) => {
       try {
         handleSaveData(values);
       } catch (error) {

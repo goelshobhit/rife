@@ -18,12 +18,7 @@ import {
   LinearProgress
 } from '@material-ui/core';
 
-import {
-  useGridSlotComponentProps,
-  DataGrid,
-  GridColDef,
-  GridToolbar
-} from '@material-ui/data-grid';
+import { DataGrid, GridColDef, GridToolbar } from '@material-ui/data-grid';
 // utils
 
 // lodash
@@ -127,7 +122,7 @@ export default function BonusList() {
       brandName: get(row, 'task_data.brand.brand_name'),
       Tier: 0,
       campaign: 0,
-      taskType: "Watch",
+      taskType: 'Watch',
       tokenProgress: 0,
       targetReachProgress: 0,
       budget: get(row, 'task_data.ta_total_available'),
@@ -345,8 +340,6 @@ export default function BonusList() {
   ];
 
   const CustomPagination = () => {
-    const { state, apiRef } = useGridSlotComponentProps();
-
     return (
       <Pagination
         color="primary"
@@ -361,7 +354,7 @@ export default function BonusList() {
   };
 
   const navigate = useNavigate();
-  
+
   return (
     <>
       <BrandRowWrapper>
@@ -381,7 +374,7 @@ export default function BonusList() {
           variant="contained"
           color="primary"
           className="button"
-          onClick={() => navigate("/dashboard/task/create")}
+          onClick={() => navigate('/dashboard/task/create')}
         >
           {' '}
           + Add New Task

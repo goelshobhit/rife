@@ -41,7 +41,7 @@ export default function RewardList() {
 
   useEffect(() => {
     dispatch(getBonusRuleList({ bonusPageNo: 1 }));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (hasMoreBrands) {

@@ -39,15 +39,6 @@ const AccountStyle = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.grey[500_12]
 }));
 
-const DocStyle = styled('div')(({ theme }) => ({
-  padding: theme.spacing(2.5),
-  borderRadius: theme.shape.borderRadiusMd,
-  backgroundColor:
-    theme.palette.mode === 'light'
-      ? alpha(theme.palette.primary.main, 0.08)
-      : theme.palette.primary.lighter
-}));
-
 // ----------------------------------------------------------------------
 
 type IconCollapseProps = {

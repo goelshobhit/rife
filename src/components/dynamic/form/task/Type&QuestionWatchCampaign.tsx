@@ -29,11 +29,6 @@ const HeadingStyle = styled(Typography)(() => ({
   paddingBottom: 14
 }));
 
-const EndDateDisabledStyle = styled(TextField)(() => ({
-  transform: 'translate(20px, 38px)',
-  width: '48%'
-}));
-
 type Props = {
   fieldJson: any;
   disabled: boolean;
@@ -57,7 +52,7 @@ const RowStyle = styled('div')(() => ({
   marginTop: 58
 }));
 
-const NextButtonStyle = styled(Button)(({ theme }) => ({
+const NextButtonStyle = styled(Button)(() => ({
   borderColor: 'inherit',
   borderRadius: 23,
   padding: '6px 16px 6px 16px',
@@ -70,22 +65,17 @@ const NextButtonStyle = styled(Button)(({ theme }) => ({
 export function DynamicFormTypeWatchCampaign({
   fieldJson,
   disabled,
-  selectedBrand,
   handleSetHeading,
-  formData,
-  handleNext,
   handleBack,
   activeStep,
   handleSaveNext,
   initialValues,
   validationSchema
 }: Props) {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
   const formik = useFormik<InitialValues>({
     initialValues,
     validationSchema,
-    onSubmit: async (values, { resetForm }: any) => {
+    onSubmit: async (values) => {
       try {
         handleSaveData(values);
       } catch (error) {

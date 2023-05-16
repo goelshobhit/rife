@@ -7,12 +7,7 @@ import get from 'lodash/get';
 // material
 import { Typography, Pagination, Button, Link } from '@material-ui/core';
 
-import {
-  useGridSlotComponentProps,
-  DataGrid,
-  GridColDef,
-  GridToolbar
-} from '@material-ui/data-grid';
+import { DataGrid, GridColDef, GridToolbar } from '@material-ui/data-grid';
 // utils
 
 // lodash

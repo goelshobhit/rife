@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import includes from 'lodash/includes';
 // material
-import { Typography, TextField, Grid } from '@material-ui/core';
+import { TextField, Grid } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 // material
 import { styled } from '@material-ui/core/styles';
-import { UploadSingleFile, UploadSingleSoundFile, UploadAuidenceFile } from '../../../upload';
+import { UploadSingleFile, UploadSingleSoundFile } from '../../../upload';
 
 const SectionStyle = styled('div')(({ theme }) => ({
   width: '100%',

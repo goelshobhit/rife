@@ -158,7 +158,6 @@ export const taskForm = {
           label: 'Description',
           name: 'description',
           type: FIELDTYPE.TEXT,
-          isMandatory: true,
           isMandatory: true
         }
       ]

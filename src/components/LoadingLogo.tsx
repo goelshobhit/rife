@@ -1,12 +1,10 @@
 // material
 import { useTheme } from '@material-ui/core/styles';
-import { Box, BoxProps } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 
 // ----------------------------------------------------------------------
 
 export default function LoadingLogo() {
-  const theme = useTheme();
-
   return (
     <Box>
       <svg
