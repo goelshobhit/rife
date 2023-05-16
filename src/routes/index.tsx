@@ -61,7 +61,7 @@ export default function Router() {
         },
         { path: 'login-unprotected', element: <Login /> },
         { path: 'register-unprotected', element: <Register /> },
-        { path: 'reset-password', element: <ResetPassword /> },
+        { path: 'reset-password', element: <ResetPassword /> }
         // { path: 'verify', element: <VerifyCode /> }
       ]
     },
@@ -88,46 +88,46 @@ export default function Router() {
           ]
         },
         {
-          path:'bonus',
+          path: 'bonus',
           children: [
-            { path:"/", element: <BonusList /> },
-            { path:"prize", element: <BonusPrizeList /> },
-            { path:"rule", element: <BonusRuleList /> },
-            { path:"set", element: <BonusSetList /> },
-            { path:"rule/add", element: <BonusRuleDetailList /> },
-            { path: "set/add", element: <BonusSetDetailList />},
-            { path: "set/:id", element: <BonusSetDetail />}
+            { path: '/', element: <BonusList /> },
+            { path: 'prize', element: <BonusPrizeList /> },
+            { path: 'rule', element: <BonusRuleList /> },
+            { path: 'set', element: <BonusSetList /> },
+            { path: 'rule/add', element: <BonusRuleDetailList /> },
+            { path: 'set/add', element: <BonusSetDetailList /> },
+            { path: 'set/:id', element: <BonusSetDetail /> }
           ]
         },
         {
-          path:'brand',
+          path: 'brand',
           children: [
-            { path:"/", element: <BrandList /> },
-            { path:'user', element: <BrandUserList /> }
+            { path: '/', element: <BrandList /> },
+            { path: 'user', element: <BrandUserList /> }
           ]
         },
         {
-          path:'usersList',
+          path: 'usersList',
           children: [
-            { path:"/", element: <UsersList /> },
-            { path:"admin", element: <UsersAdminList /> },
-            { path:"invited", element: <UsersInvitedList /> },
+            { path: '/', element: <UsersList /> },
+            { path: 'admin', element: <UsersAdminList /> },
+            { path: 'invited', element: <UsersInvitedList /> }
           ]
         },
         {
-          path:'reward',
+          path: 'reward',
           children: [
-            { path:"/", element: <RewardList /> },
-            { path:"count", element: <RewardCountList /> },
-            { path:"center", element: <RewardCenterList /> },
-            { path:"setting", element: <RewardSettingList /> },
-            { path:"selection", element: <RewardSelectionList /> },
-            { path:"engineAwards", element: <RewardEngineAwardsList /> },
-            { path:"engineRewards", element: <RewardEngineRewardsList /> },
-            { path:"engineRequests", element: <RewardEngineRequestList /> },
-            { path:'center/:id',element: <RewardDetail /> }
+            { path: '/', element: <RewardList /> },
+            { path: 'count', element: <RewardCountList /> },
+            { path: 'center', element: <RewardCenterList /> },
+            { path: 'setting', element: <RewardSettingList /> },
+            { path: 'selection', element: <RewardSelectionList /> },
+            { path: 'engineAwards', element: <RewardEngineAwardsList /> },
+            { path: 'engineRewards', element: <RewardEngineRewardsList /> },
+            { path: 'engineRequests', element: <RewardEngineRequestList /> },
+            { path: 'center/:id', element: <RewardDetail /> }
           ]
-        },
+        }
       ]
     },
 
@@ -147,14 +147,14 @@ export default function Router() {
     },
     {
       path: '/',
-      element:  (
+      element: (
         <AuthGuard>
           <DashboardLayout />
         </AuthGuard>
       ),
       children: [
         { path: '/', element: <Navigate to="/dashboard/app" replace /> },
-        { path: 'app', element: <GeneralApp /> },
+        { path: 'app', element: <GeneralApp /> }
       ]
     },
     { path: '*', element: <Navigate to="/404" replace /> }
@@ -175,32 +175,48 @@ const Page500 = Loadable(lazy(() => import('../pages/Page500')));
 const NotFound = Loadable(lazy(() => import('../pages/Page404')));
 // Components
 
-const TaskList =  Loadable(lazy(() => import('../pages/dashboard/task/task_list')));
-const TaskCreateList =  Loadable(lazy(() => import('../pages/dashboard/task/mutipleTask')));
-const TaskContestList =  Loadable(lazy(() => import('../pages/dashboard/task/task_contest_list')));
-const TaskQuestionList =  Loadable(lazy(() => import('../pages/dashboard/task/task_question_list')));
-const TaskWatchList =  Loadable(lazy(() => import('../pages/dashboard/task/task_watch_list')));
+const TaskList = Loadable(lazy(() => import('../pages/dashboard/task/task_list')));
+const TaskCreateList = Loadable(lazy(() => import('../pages/dashboard/task/mutipleTask')));
+const TaskContestList = Loadable(lazy(() => import('../pages/dashboard/task/task_contest_list')));
+const TaskQuestionList = Loadable(lazy(() => import('../pages/dashboard/task/task_question_list')));
+const TaskWatchList = Loadable(lazy(() => import('../pages/dashboard/task/task_watch_list')));
 
-const BonusList =  Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_list')));
-const BonusPrizeList =  Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_prize_list')));
-const BonusRuleList =  Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_rules_list')));
-const BonusSetList =  Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_set_list')));
-const BonusRuleDetailList =  Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_detail_list')));
+const BonusList = Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_list')));
+const BonusPrizeList = Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_prize_list')));
+const BonusRuleList = Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_rules_list')));
+const BonusSetList = Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_set_list')));
+const BonusRuleDetailList = Loadable(
+  lazy(() => import('../pages/dashboard/bonus/bonus_detail_list'))
+);
 
-const BonusSetDetailList =  Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_set_detail_list')));
-const BonusSetDetail =  Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_set_detail')));
+const BonusSetDetailList = Loadable(
+  lazy(() => import('../pages/dashboard/bonus/bonus_set_detail_list'))
+);
+const BonusSetDetail = Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_set_detail')));
 
-const BrandList =  Loadable(lazy(() => import('../pages/dashboard/brand/brand_list')));
-const BrandUserList =  Loadable(lazy(() => import('../pages/dashboard/brand/brand_user_list')));
-const UsersList =  Loadable(lazy(() => import('../pages/dashboard/user/users_list')));
-const UsersAdminList =  Loadable(lazy(() => import('../pages/dashboard/user/users_admin_list')));
-const UsersInvitedList =  Loadable(lazy(() => import('../pages/dashboard/user/users_invited_list')));
-const RewardList =  Loadable(lazy(() => import('../pages/dashboard/reward/reward_list')));
-const RewardDetail =  Loadable(lazy(() => import('../pages/dashboard/reward/reward_detail_page')));
-const RewardCountList =  Loadable(lazy(() => import('../pages/dashboard/reward/reward_count_list')));
-const RewardCenterList =  Loadable(lazy(() => import('../pages/dashboard/reward/reward_center_list')));
-const RewardSettingList =  Loadable(lazy(() => import('../pages/dashboard/reward/reward_setting_list')));
-const RewardSelectionList =  Loadable(lazy(() => import('../pages/dashboard/reward/reward_selection_list')));
-const RewardEngineAwardsList =  Loadable(lazy(() => import('../pages/dashboard/reward/reward_engine_award_list')));
-const RewardEngineRewardsList =  Loadable(lazy(() => import('../pages/dashboard/reward/reward_engine_reward_list')));
-const RewardEngineRequestList =  Loadable(lazy(() => import('../pages/dashboard/reward/reward_engine_request_list')));
+const BrandList = Loadable(lazy(() => import('../pages/dashboard/brand/brand_list')));
+const BrandUserList = Loadable(lazy(() => import('../pages/dashboard/brand/brand_user_list')));
+const UsersList = Loadable(lazy(() => import('../pages/dashboard/user/users_list')));
+const UsersAdminList = Loadable(lazy(() => import('../pages/dashboard/user/users_admin_list')));
+const UsersInvitedList = Loadable(lazy(() => import('../pages/dashboard/user/users_invited_list')));
+const RewardList = Loadable(lazy(() => import('../pages/dashboard/reward/reward_list')));
+const RewardDetail = Loadable(lazy(() => import('../pages/dashboard/reward/reward_detail_page')));
+const RewardCountList = Loadable(lazy(() => import('../pages/dashboard/reward/reward_count_list')));
+const RewardCenterList = Loadable(
+  lazy(() => import('../pages/dashboard/reward/reward_center_list'))
+);
+const RewardSettingList = Loadable(
+  lazy(() => import('../pages/dashboard/reward/reward_setting_list'))
+);
+const RewardSelectionList = Loadable(
+  lazy(() => import('../pages/dashboard/reward/reward_selection_list'))
+);
+const RewardEngineAwardsList = Loadable(
+  lazy(() => import('../pages/dashboard/reward/reward_engine_award_list'))
+);
+const RewardEngineRewardsList = Loadable(
+  lazy(() => import('../pages/dashboard/reward/reward_engine_reward_list'))
+);
+const RewardEngineRequestList = Loadable(
+  lazy(() => import('../pages/dashboard/reward/reward_engine_request_list'))
+);

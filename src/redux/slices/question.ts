@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import forEach from 'lodash/forEach';
 import concat from 'lodash/concat';
 import map from 'lodash/map';
 import get from 'lodash/get';
 import size from 'lodash/size';
-import { capitalize, sortBy } from 'lodash';
+import { capitalize } from 'lodash';
 import { store } from '../store';
 // utils
 import axios from '../../utils/axios';
@@ -17,7 +16,7 @@ const initialState: taskQuestionState = {
   loading: false,
   brands: [],
   brandPageNo: 1,
-  hasMoreBrands: true,
+  hasMoreBrands: true
 };
 
 const slice = createSlice({
@@ -36,7 +35,7 @@ const slice = createSlice({
     },
     handleHasMore(state) {
       state.hasMoreBrands = false;
-    },
+    }
   }
 });
 
@@ -53,14 +52,12 @@ export function getAllBrands(params: any) {
     const { dispatch } = store;
     dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get(
-        `/brand?pageNumber=${params.brandPageNo}`
-      );
+      const response = await axios.get(`/brand?pageNumber=${params.brandPageNo}`);
       if (size(get(response, 'data.data', [])) < 10) {
         dispatch(slice.actions.handleHasMore());
       }
       const getBrandName = map(get(response, 'data.data', []), (item: any) => {
-        const data = { name: capitalize(item.cr_co_name), ...item, };
+        const data = { name: capitalize(item.cr_co_name), ...item };
         return data;
       });
       dispatch(slice.actions.getTaskBrandSuccess(getBrandName));
@@ -71,13 +68,12 @@ export function getAllBrands(params: any) {
   };
 }
 
-
 export function createSurvey(params: any) {
   return async () => {
     try {
       await axios.post('/survey', {
-        ...params,
-      })
+        ...params
+      });
     } catch (error) {
       // console.log(error);
       // do nothing
