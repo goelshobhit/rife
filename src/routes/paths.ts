@@ -82,38 +82,42 @@ export const PATH_DASHBOARD = {
     create: path(ROOTS_DASHBOARD, '/task/create'),
     contest: path(ROOTS_DASHBOARD, '/task/contest'),
     watch: path(ROOTS_DASHBOARD, '/task/watch'),
-    questions: path(ROOTS_DASHBOARD, '/task/questions'),
+    questions: path(ROOTS_DASHBOARD, '/task/questions')
   },
   bonus: {
-    bonus_root:path(ROOTS_DASHBOARD, '/bonus'),
+    bonus_root: path(ROOTS_DASHBOARD, '/bonus'),
     bonus_prize: path(ROOTS_DASHBOARD, '/bonus/prize'),
     bonus_rule: path(ROOTS_DASHBOARD, '/bonus/rule'),
     bonus_set: path(ROOTS_DASHBOARD, '/bonus/set'),
-    bonus_rule_detail:path(ROOTS_DASHBOARD, '/bonus/rule/add'),
-    bonus_set_detail_list: path(ROOTS_DASHBOARD,'/bonus/set/add'),
-    bonus_set_detail: path(ROOTS_DASHBOARD,'/bonus/set/:id'),
+    bonus_rule_detail: path(ROOTS_DASHBOARD, '/bonus/rule/add'),
+    bonus_set_detail_list: path(ROOTS_DASHBOARD, '/bonus/set/add'),
+    bonus_set_detail: path(ROOTS_DASHBOARD, '/bonus/set/:id')
   },
   userList: {
     userList_root: path(ROOTS_DASHBOARD, '/usersList'),
+    userList_create: path(ROOTS_DASHBOARD, '/usersList/create'),
     userList_admin_root: path(ROOTS_DASHBOARD, '/usersList/admin'),
-    userList_invited_root: path(ROOTS_DASHBOARD, '/usersList/invited'),
+    userList_admin_create: path(ROOTS_DASHBOARD, '/usersList/admin/create'),
+    userList_invited_root: path(ROOTS_DASHBOARD, '/usersList/invited')
   },
   brand: {
-    brand_root:path(ROOTS_DASHBOARD, '/brand'),
-    brand_user_root:path(ROOTS_DASHBOARD, '/brand/user'),
+    brand_root: path(ROOTS_DASHBOARD, '/brand'),
+    brand_create: path(ROOTS_DASHBOARD, '/brand/create'),
+    brand_update: path(ROOTS_DASHBOARD, '/brand/edit/:id'),
+    brand_user_root: path(ROOTS_DASHBOARD, '/brand/user')
   },
   reward: {
-    reward_root:path(ROOTS_DASHBOARD, '/reward'),
-    reward_count:path(ROOTS_DASHBOARD, '/reward/count'),
-    reward_awards:path(ROOTS_DASHBOARD, '/reward/awards'),
-    reward_center:path(ROOTS_DASHBOARD, '/reward/center'),
-    reward_setting:path(ROOTS_DASHBOARD, '/reward/setting'),
-    reward_selection:path(ROOTS_DASHBOARD, '/reward/selection'),
-    reward_engine_awards:path(ROOTS_DASHBOARD, '/reward/engineAwards'),
-    reward_engine_rewards:path(ROOTS_DASHBOARD, '/reward/engineRewards'),
-    reward_engine_requests:path(ROOTS_DASHBOARD, '/reward/engineRequests'),
-    reward_center_detail:path(ROOTS_DASHBOARD, '/reward/center/:id'),
-  },
+    reward_root: path(ROOTS_DASHBOARD, '/reward'),
+    reward_count: path(ROOTS_DASHBOARD, '/reward/count'),
+    reward_awards: path(ROOTS_DASHBOARD, '/reward/awards'),
+    reward_center: path(ROOTS_DASHBOARD, '/reward/center'),
+    reward_setting: path(ROOTS_DASHBOARD, '/reward/setting'),
+    reward_selection: path(ROOTS_DASHBOARD, '/reward/selection'),
+    reward_engine_awards: path(ROOTS_DASHBOARD, '/reward/engineAwards'),
+    reward_engine_rewards: path(ROOTS_DASHBOARD, '/reward/engineRewards'),
+    reward_engine_requests: path(ROOTS_DASHBOARD, '/reward/engineRequests'),
+    reward_center_detail: path(ROOTS_DASHBOARD, '/reward/center/:id')
+  }
 };
 
 export const PATH_DOCS = 'https://docs-minimals.vercel.app/introduction';

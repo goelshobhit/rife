@@ -1,0 +1,228 @@
+import { useSnackbar } from 'notistack5';
+import { useNavigate } from 'react-router-dom';
+import { Form, FormikProvider, useFormik } from 'formik';
+import { styled } from '@material-ui/core/styles';
+import map from 'lodash/map';
+import * as Yup from 'yup';
+// material
+import {
+  Card,
+  Stack,
+  TextField,
+  Button,
+  Typography,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  MenuItem
+} from '@material-ui/core';
+import { useDispatch } from '../../../../redux/store';
+import { createAdminUser } from '../../../../redux/slices/usersList';
+
+const HeadingStyle = styled(Typography)(() => ({
+  paddingBottom: 14
+}));
+
+const BoxStyle = styled(Card)(() => ({
+  padding: '32px',
+  background: '#FFFFFF',
+  /* V3 reward shaddow */
+  boxShadow: '0px 5px 10px rgba(0, 0, 0, 0.06), 0px -5px 10px rgba(0, 0, 0, 0.06)',
+  borderRadius: '12px',
+  width: '100%'
+}));
+
+export default function AdminUsersCreate() {
+  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const roleList = [
+    {
+      label: 'Admin',
+      value: 1
+    }
+  ];
+  const adminUserSchema = Yup.object().shape({
+    email: Yup.string().email('Email must be a valid email').max(255).required('Email is required'),
+    username: Yup.string().max(255).required('Username is required'),
+    password: Yup.string().min(8).max(15).required('Password is required'),
+    confirmPassword: Yup.string()
+      .required('Confirm Password is required')
+      .oneOf([Yup.ref('password')], 'Confirm Passwords must match to the password')
+  });
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      email: '',
+      username: '',
+      password: '',
+      confirmPassword: '',
+      role: 1,
+      status: '1'
+    },
+    validationSchema: adminUserSchema,
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      try {
+        const payload = {
+          'User email': values.email,
+          'User name': values.username,
+          'User password': values.password,
+          'User status': values.status,
+          'User role': values.role
+        };
+        dispatch(createAdminUser(payload));
+        resetForm();
+        setSubmitting(false);
+        enqueueSnackbar('Admin User Created', { variant: 'success' });
+        navigate('/dashboard/usersList/admin');
+      } catch (error) {
+        console.error(error);
+        setSubmitting(false);
+      }
+    }
+  });
+
+  const { values, touched, handleSubmit, setFieldValue, errors } = formik;
+
+  return (
+    <FormikProvider value={formik}>
+      <Form autoComplete="off" onSubmit={handleSubmit}>
+        <Stack spacing={3} sx={{ p: 3 }} direction="row">
+          <BoxStyle>
+            <HeadingStyle gutterBottom variant="h4">
+              Create New Admin User
+            </HeadingStyle>
+            <Stack spacing={2} direction="column">
+              <Stack spacing={2} direction="row">
+                <TextField
+                  variant="outlined"
+                  name="role"
+                  id="role"
+                  select
+                  label="Admin Role"
+                  value={values.role}
+                  defaultValue={values.role}
+                  onChange={(e) => setFieldValue('role', e.target.value)}
+                  fullWidth
+                  error={Boolean(touched.role && errors.role)}
+                  helperText={touched.role && errors.role}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                >
+                  {map(roleList, (item: any, index: any) => (
+                    <MenuItem value={item.value} key={index}>
+                      {item.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <TextField
+                  variant="outlined"
+                  name="userName"
+                  label="Username"
+                  value={values.username}
+                  onChange={(e) => setFieldValue('username', e.target.value)}
+                  fullWidth
+                  error={Boolean(touched.username && errors.username)}
+                  helperText={touched.username && errors.username}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                />
+                <TextField
+                  variant="outlined"
+                  name="email"
+                  label="Email"
+                  value={values.email}
+                  onChange={(e) => setFieldValue('email', e.target.value)}
+                  fullWidth
+                  error={Boolean(touched.email && errors.email)}
+                  helperText={touched.email && errors.email}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                />
+              </Stack>
+              <Stack spacing={2} direction="row">
+                <TextField
+                  variant="outlined"
+                  type="password"
+                  name="password"
+                  label="Password"
+                  value={values.password}
+                  onChange={(e) => setFieldValue('password', e.target.value)}
+                  fullWidth
+                  error={Boolean(touched.password && errors.password)}
+                  helperText={touched.password && errors.password}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                />
+                <TextField
+                  variant="outlined"
+                  type="password"
+                  name="confirmPassword"
+                  label="Confirm Password"
+                  value={values.confirmPassword}
+                  onChange={(e) => setFieldValue('confirmPassword', e.target.value)}
+                  fullWidth
+                  error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+                  helperText={touched.confirmPassword && errors.confirmPassword}
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                />
+              </Stack>
+              <Stack spacing={2} direction="row">
+                <RadioGroup
+                  key="1"
+                  value={values.status}
+                  name="status"
+                  onChange={(event) => setFieldValue('status', event.target.value)}
+                >
+                  <FormControlLabel
+                    value="1"
+                    label="Active"
+                    style={{ color: 'black' }}
+                    control={<Radio size="small" />}
+                    sx={{ color: 'common.white' }}
+                  />
+                  <FormControlLabel
+                    value="0"
+                    label="Inactive"
+                    style={{ color: 'black' }}
+                    control={<Radio size="small" />}
+                    sx={{ color: 'common.white' }}
+                  />
+                </RadioGroup>
+              </Stack>
+            </Stack>
+            <Stack
+              direction="row"
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-start',
+                width: '100%',
+                marginTop: 20,
+                marginBottom: 10
+              }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                className="button"
+                type="submit"
+                style={{
+                  borderRadius: 35
+                }}
+              >
+                Create Admin User
+              </Button>
+            </Stack>
+          </BoxStyle>
+        </Stack>
+      </Form>
+    </FormikProvider>
+  );
+}

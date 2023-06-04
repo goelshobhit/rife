@@ -103,6 +103,8 @@ export default function Router() {
           path: 'brand',
           children: [
             { path: '/', element: <BrandList /> },
+            { path: 'create', element: <BrandCreate /> },
+            { path: 'edit/:id', element: <BrandUpdate /> },
             { path: 'user', element: <BrandUserList /> }
           ]
         },
@@ -110,7 +112,9 @@ export default function Router() {
           path: 'usersList',
           children: [
             { path: '/', element: <UsersList /> },
+            { path: 'create', element: <UsersCreate /> },
             { path: 'admin', element: <UsersAdminList /> },
+            { path: 'admin/create', element: <AdminUsersCreate /> },
             { path: 'invited', element: <UsersInvitedList /> }
           ]
         },
@@ -195,9 +199,13 @@ const BonusSetDetailList = Loadable(
 const BonusSetDetail = Loadable(lazy(() => import('../pages/dashboard/bonus/bonus_set_detail')));
 
 const BrandList = Loadable(lazy(() => import('../pages/dashboard/brand/brand_list')));
+const BrandCreate = Loadable(lazy(() => import('../pages/dashboard/brand/brand_create')));
+const BrandUpdate = Loadable(lazy(() => import('../pages/dashboard/brand/brand_update')));
 const BrandUserList = Loadable(lazy(() => import('../pages/dashboard/brand/brand_user_list')));
 const UsersList = Loadable(lazy(() => import('../pages/dashboard/user/users_list')));
+const UsersCreate = Loadable(lazy(() => import('../pages/dashboard/user/users_create')));
 const UsersAdminList = Loadable(lazy(() => import('../pages/dashboard/user/users_admin_list')));
+const AdminUsersCreate = Loadable(lazy(() => import('../pages/dashboard/user/user_admin_create')));
 const UsersInvitedList = Loadable(lazy(() => import('../pages/dashboard/user/users_invited_list')));
 const RewardList = Loadable(lazy(() => import('../pages/dashboard/reward/reward_list')));
 const RewardDetail = Loadable(lazy(() => import('../pages/dashboard/reward/reward_detail_page')));

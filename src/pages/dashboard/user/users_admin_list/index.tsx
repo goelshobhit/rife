@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
@@ -37,12 +37,14 @@ const BrandRowWrapper = styled('div')(() => ({
 
 export default function UsersList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loading, adminUsersList } = useSelector((state: { users: usersState }) => state.users);
   const [page, setPageNo] = useState(1);
 
   useEffect(() => {
     dispatch(getAdminUsersList({ bonusPageNo: page }));
-  }, [dispatch, page]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const SkeletonLoad = () => (
     <Grid container spacing={3} sx={{ mt: 2 }}>
@@ -75,14 +77,7 @@ export default function UsersList() {
       headerName: 'User Name',
       width: 300,
       renderCell: (params: any) => (
-        <Link
-          to={`/user/${params.row.id}`}
-          key={params.row.id}
-          variant="body2"
-          component={RouterLink}
-        >
-          <TextCellWrapperLink variant="subtitle1">{params.row.userName}</TextCellWrapperLink>
-        </Link>
+        <TextCellWrapperLink variant="subtitle1">{params.row.userName}</TextCellWrapperLink>
       )
     },
     {
@@ -124,7 +119,12 @@ export default function UsersList() {
             </motion.span>
           ))}
         </MotionContainer>
-        <Button variant="contained" color="primary" className="button">
+        <Button
+          variant="contained"
+          color="primary"
+          className="button"
+          onClick={() => navigate('/dashboard/usersList/admin/create')}
+        >
           {' '}
           + Add New Admin User
         </Button>

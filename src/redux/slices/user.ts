@@ -50,7 +50,7 @@ const initialState: UserState = {
   addressBook: [],
   invoices: [],
   notifications: null,
-  totalUsersCount: 0,
+  totalUsersCount: 0
 };
 
 const slice = createSlice({
