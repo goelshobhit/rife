@@ -5,7 +5,16 @@ import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
 import moment from 'moment';
 // material
-import { Typography, Box, Pagination, Button, Grid, Skeleton, Link } from '@material-ui/core';
+import {
+  Typography,
+  Box,
+  Pagination,
+  Button,
+  Grid,
+  Skeleton,
+  Badge,
+  DialogActions
+} from '@material-ui/core';
 
 import { DataGrid, GridColDef, GridToolbar } from '@material-ui/data-grid';
 // redux
@@ -81,40 +90,40 @@ export default function UsersList() {
     {
       field: 'userName',
       headerName: 'User Name',
-      width: 300,
-      renderCell: (params: any) => (
-        <TextCellWrapperLink variant="subtitle1">{params.row.userName}</TextCellWrapperLink>
-      )
+      width: 300
     },
     {
       field: 'u_email',
       headerName: 'Email',
-      width: 200
+      width: 300
     },
     {
       field: 'u_active',
-      headerName: 'Active',
-      width: 200
-    },
-    {
-      field: 'emailVerified',
-      headerName: 'Is Email Verified ?',
-      width: 200
-    },
-    {
-      field: 'is_user_deactivated',
-      headerName: 'Is Deactivated ?',
-      width: 200
-    },
-    {
-      field: 'is_user_hidden',
-      headerName: 'Is Hidden ?',
-      width: 200
+      headerName: 'Active / Inactive',
+      width: 200,
+      renderCell: (params: any) => (
+        <Badge>{params.row.u_active == 'True' ? 'Active' : 'Inactive'}</Badge>
+      )
     },
     {
       field: 'createdAt',
       headerName: 'Created At',
       width: 200
+    },
+    {
+      field: 'action',
+      headerName: 'Action',
+      width: 300,
+      renderCell: (params: any) => (
+        <DialogActions>
+          <Button
+            variant="contained"
+            onClick={() => navigate(`/dashboard/usersList/edit/${params.row.id}`)}
+          >
+            Edit
+          </Button>
+        </DialogActions>
+      )
     }
   ];
 

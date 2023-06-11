@@ -6,4 +6,7 @@ export type usersState = {
   usersList: Array<[]>;
   adminUsersList: Array<[]>;
   invitedUsersList: Array<[]>;
+  adminSetting: object;
+  adminUsersData: object;
+  usersData: object;
 };

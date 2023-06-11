@@ -96,8 +96,10 @@ export const PATH_DASHBOARD = {
   userList: {
     userList_root: path(ROOTS_DASHBOARD, '/usersList'),
     userList_create: path(ROOTS_DASHBOARD, '/usersList/create'),
+    userList_update: path(ROOTS_DASHBOARD, '/usersList/edit/:id'),
     userList_admin_root: path(ROOTS_DASHBOARD, '/usersList/admin'),
     userList_admin_create: path(ROOTS_DASHBOARD, '/usersList/admin/create'),
+    userList_admin_update: path(ROOTS_DASHBOARD, '/usersList/admin/edit/:id'),
     userList_invited_root: path(ROOTS_DASHBOARD, '/usersList/invited')
   },
   brand: {

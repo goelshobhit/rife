@@ -1,25 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
 import moment from 'moment';
 // material
-import {
-  Typography,
-  Box,
-  Pagination,
-  Button,
-  Grid,
-  Skeleton,
-  Link,
-  DialogActions
-} from '@material-ui/core';
+import { Box, Pagination, Button, Grid, Skeleton, DialogActions } from '@material-ui/core';
 
 import { DataGrid, GridColDef, GridToolbar } from '@material-ui/data-grid';
-// utils
-
-// lodash
 
 // redux
 import { useDispatch, useSelector } from '../../../../redux/store';
@@ -30,12 +18,6 @@ import { brandState } from '../../../../@types/brand';
 // components
 import { MotionContainer } from '../../../../components/animate';
 import getVariant from '../../../components-overview/extra/animate/getVariant';
-
-const TextCellWrapperLink = styled(Typography)(() => ({
-  fontSize: 14,
-  color: '#00BAEF',
-  textDecoration: 'underline'
-}));
 
 const BrandRowWrapper = styled('div')(() => ({
   paddingBottom: 48,
@@ -85,10 +67,7 @@ export default function BrandList() {
     {
       field: 'cr_co_name',
       headerName: 'Brand Name',
-      width: 300,
-      renderCell: (params: any) => (
-        <TextCellWrapperLink variant="subtitle1">{params.row.cr_co_name}</TextCellWrapperLink>
-      )
+      width: 300
     },
     {
       field: 'cr_co_created_at',

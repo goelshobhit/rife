@@ -26,7 +26,7 @@ const HeadingStyle = styled(Typography)(({ theme }) => ({
   marginBottom: 32
 }));
 
-export default function RewardList() {
+export default function BonusRuleDetailList() {
   const dispatch = useDispatch();
   const { loading, brandPageNo, rewardBrandList, hasMoreBrands } = useSelector(
     (state: { reward: rewardState }) => state.reward

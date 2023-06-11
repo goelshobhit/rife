@@ -13,7 +13,10 @@ const initialState: usersState = {
   error: false,
   usersList: [],
   adminUsersList: [],
-  invitedUsersList: []
+  invitedUsersList: [],
+  adminSetting: {},
+  adminUsersData: {},
+  usersData: {}
 };
 
 const slice = createSlice({
@@ -29,12 +32,27 @@ const slice = createSlice({
     },
     usersListSuccess(state, action) {
       state.usersList = action.payload;
+      state.error = false;
+    },
+    usersByIdSuccess(state, action) {
+      state.usersData = action.payload;
+      state.error = false;
     },
     usersAdminListSuccess(state, action) {
       state.adminUsersList = action.payload;
+      state.error = false;
+    },
+    usersAdminByIdSuccess(state, action) {
+      state.adminUsersData = action.payload;
+      state.error = false;
     },
     usersInvitedListSuccess(state, action) {
       state.invitedUsersList = action.payload;
+      state.error = false;
+    },
+    userAdminSettingSuccess(state, action) {
+      state.adminSetting = action.payload;
+      state.error = false;
     },
     hasError(state, action) {
       state.loading = false;
@@ -68,6 +86,18 @@ export function getUsersList(params: any) {
   };
 }
 
+export function getUsersById(id: number) {
+  return async () => {
+    const { dispatch } = store;
+    try {
+      const response = await axios.get(`users/${id}`);
+      dispatch(slice.actions.usersByIdSuccess(response.data.user_details));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
 export function getAdminUsersList(params: any) {
   return async () => {
     const { dispatch } = store;
@@ -84,6 +114,18 @@ export function getAdminUsersList(params: any) {
       );
     } catch (error) {
       // console.log(error);
+    }
+  };
+}
+
+export function getAdminUsersById(id: number) {
+  return async () => {
+    const { dispatch } = store;
+    try {
+      const response = await axios.get(`admin_users/${id}`);
+      dispatch(slice.actions.usersAdminByIdSuccess(response.data.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
     }
   };
 }
@@ -119,11 +161,55 @@ export function createUser(params: any) {
   };
 }
 
+export function updateUser(params: any, id: number) {
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      await axios.put(`users/${id}`, { ...params });
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
 export function createAdminUser(params: any) {
   return async () => {
     dispatch(slice.actions.startLoading());
     try {
       await axios.post(`admin_users`, { ...params });
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function updateAdminUser(params: any, id: number) {
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      await axios.put(`admin_users/${id}`, { ...params });
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function getAdminSetting() {
+  return async () => {
+    dispatch(slice.actions.startLoading());
+    try {
+      const response = await axios.get(`admin_setting`);
+      dispatch(slice.actions.userAdminSettingSuccess(response.data.data));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function changeAdminSetting(params: any) {
+  return async () => {
+    try {
+      await axios.put(`admin_setting`, { ...params });
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }

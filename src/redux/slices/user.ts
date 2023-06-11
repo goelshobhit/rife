@@ -319,3 +319,13 @@ export function getUsers() {
     }
   };
 }
+
+export function changePassword(params: any) {
+  return async () => {
+    try {
+      await axios.post(`users/changepassword`, { ...params });
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}

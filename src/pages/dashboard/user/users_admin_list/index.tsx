@@ -4,7 +4,16 @@ import { motion } from 'framer-motion';
 import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
 // material
-import { Typography, Box, Pagination, Button, Grid, Skeleton, Link } from '@material-ui/core';
+import {
+  Typography,
+  Box,
+  Pagination,
+  Button,
+  Grid,
+  Skeleton,
+  Badge,
+  DialogActions
+} from '@material-ui/core';
 
 import { DataGrid, GridColDef, GridToolbar } from '@material-ui/data-grid';
 // utils
@@ -75,20 +84,35 @@ export default function UsersList() {
     {
       field: 'userName',
       headerName: 'User Name',
-      width: 300,
-      renderCell: (params: any) => (
-        <TextCellWrapperLink variant="subtitle1">{params.row.userName}</TextCellWrapperLink>
-      )
+      width: 300
     },
     {
       field: 'u_email',
       headerName: 'Email',
-      width: 200
+      width: 400
     },
     {
       field: 'u_active',
-      headerName: 'Active',
-      width: 200
+      headerName: 'Active / Inactive',
+      width: 200,
+      renderCell: (params: any) => (
+        <Badge>{params.row.u_active == 'True' ? 'Active' : 'Inactive'}</Badge>
+      )
+    },
+    {
+      field: 'action',
+      headerName: 'Action',
+      width: 300,
+      renderCell: (params: any) => (
+        <DialogActions>
+          <Button
+            variant="contained"
+            onClick={() => navigate(`/dashboard/usersList/admin/edit/${params.row.id}`)}
+          >
+            Edit
+          </Button>
+        </DialogActions>
+      )
     }
   ];
 

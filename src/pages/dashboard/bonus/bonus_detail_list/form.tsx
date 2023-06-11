@@ -1,3 +1,4 @@
+import * as Yup from 'yup';
 import { useSnackbar } from 'notistack5';
 import { useNavigate } from 'react-router-dom';
 import { FieldArray, Form, FormikProvider, useFormik } from 'formik';
@@ -14,7 +15,8 @@ import {
   Typography,
   Button,
   MenuItem,
-  Autocomplete
+  Autocomplete,
+  FormHelperText
 } from '@material-ui/core';
 // @types
 
@@ -22,6 +24,7 @@ import { TrashIcon } from '../../../../assets';
 import { useDispatch } from '../../../../redux/store';
 import { createBonusTicketRules, getBonusRuleList } from '../../../../redux/slices/bonus';
 // utils
+import { QuillEditor } from '../../../../components/editor';
 
 interface Props {
   rewardBrandList: Array<[]>;
@@ -60,32 +63,35 @@ const AddButtonStyle = styled(Button)(() => ({
   color: '#232323'
 }));
 
-export default function RewardNewForm({ rewardBrandList }: Props) {
+export default function BonusRulesNewForm({ rewardBrandList }: Props) {
   const TiCKET_RULE = ['Historical Data', 'Follower', 'App Level', 'Social Network'];
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const taskRulesSchema = Yup.object().shape({
+    bonus_ticket_name: Yup.string().max(255).required('Bonus Ticket Name is required')
+  });
+
   const formik = useFormik({
     enableReinitialize: true,
+    validationSchema: taskRulesSchema,
     initialValues: {
       bonus_ticket_name: '',
       ticket_rule: TiCKET_RULE,
-      brand: '',
-      bonus_ticket_status: '',
       bonus_rule_1: [{ From: '', To: '', Ticket: '' }],
       bonus_rule_2: [{ From: '', To: '', Ticket: '' }],
       bonus_rule_3: [{ From: '', To: '', Ticket: '' }],
       bonus_rule_4: [{ From: '', To: '', Ticket: '' }],
-      bonus_rule_4_social_network: ''
+      bonus_rule_4_social_network: '',
+      how_it_works: '',
+      cashout_rules: ''
     },
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       try {
         const payload = {
           'Bonus Ticket Rule Name': values.bonus_ticket_name,
-          brand: values.brand,
-          status: values.bonus_ticket_status,
-          'Bonus Ticket Rule Details': [
+          'Bonus Ticket Rules': [
             {
               'Bonus Rule Type': 1,
               'Social Networks': null,
@@ -106,7 +112,9 @@ export default function RewardNewForm({ rewardBrandList }: Props) {
               'Social Networks': values.bonus_rule_4_social_network,
               'Bonus Rules': values.bonus_rule_4
             }
-          ]
+          ],
+          'How It Works': values.how_it_works,
+          'Cashout Rules': values.cashout_rules
         };
         dispatch(createBonusTicketRules(payload));
         resetForm();
@@ -135,28 +143,9 @@ export default function RewardNewForm({ rewardBrandList }: Props) {
                   fullWidth
                   InputLabelProps={{ shrink: true }}
                   onChange={(e) => setFieldValue('bonus_ticket_name', e.target.value)}
+                  error={Boolean(touched.bonus_ticket_name && errors.bonus_ticket_name)}
+                  helperText={touched.bonus_ticket_name && errors.bonus_ticket_name}
                 />
-                <TextField
-                  variant="outlined"
-                  name="brand"
-                  id="brand"
-                  select
-                  label="Brand"
-                  value={values.brand}
-                  onChange={(e) => setFieldValue('brand', e.target.value)}
-                  fullWidth
-                  error={Boolean(touched.brand && errors.brand)}
-                  helperText={touched.brand && errors.brand}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                >
-                  {map(rewardBrandList, (item: any) => (
-                    <MenuItem value={item.cr_co_id} key={item}>
-                      {item.name}
-                    </MenuItem>
-                  ))}
-                </TextField>
               </Stack>
               <Stack spacing={3} direction="row">
                 <Autocomplete
@@ -178,28 +167,6 @@ export default function RewardNewForm({ rewardBrandList }: Props) {
                     />
                   )}
                 />
-
-                <TextField
-                  variant="outlined"
-                  name="bonus_ticket_status"
-                  id="bonus_ticket_status"
-                  select
-                  label="Brand Status"
-                  value={values.bonus_ticket_status}
-                  onChange={(e) => setFieldValue('bonus_ticket_status', e.target.value)}
-                  fullWidth
-                  error={Boolean(touched.bonus_ticket_status && errors.bonus_ticket_status)}
-                  helperText={touched.bonus_ticket_status && errors.bonus_ticket_status}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                >
-                  {map(['Active', 'InActive'], (item: any, index: number) => (
-                    <MenuItem value={index} key={item}>
-                      {item}
-                    </MenuItem>
-                  ))}
-                </TextField>
               </Stack>
             </Stack>
             <>
@@ -586,6 +553,42 @@ export default function RewardNewForm({ rewardBrandList }: Props) {
                 )}
               </Stack>
             </>
+            <Stack spacing={2} direction="row">
+              <Stack spacing={2} direction="column">
+                <QuillEditor
+                  id="how-it-works"
+                  placeholder="How It Works"
+                  sx={{
+                    margin: '10px'
+                  }}
+                  value={values.how_it_works}
+                  onChange={(val) => setFieldValue('how_it_works', val)}
+                  error={Boolean(touched.how_it_works && errors.how_it_works)}
+                />
+                {touched.how_it_works && errors.how_it_works && (
+                  <FormHelperText error sx={{ px: 2 }}>
+                    {touched.how_it_works && errors.how_it_works}
+                  </FormHelperText>
+                )}
+              </Stack>
+              <Stack spacing={2} direction="column">
+                <QuillEditor
+                  id="cashout-rules"
+                  placeholder="Cashout Rules"
+                  value={values.cashout_rules}
+                  sx={{
+                    margin: '10px'
+                  }}
+                  onChange={(val) => setFieldValue('cashout_rules', val)}
+                  error={Boolean(touched.cashout_rules && errors.cashout_rules)}
+                />
+                {touched.cashout_rules && errors.cashout_rules && (
+                  <FormHelperText error sx={{ px: 2 }}>
+                    {touched.cashout_rules && errors.cashout_rules}
+                  </FormHelperText>
+                )}
+              </Stack>
+            </Stack>
             <Stack
               direction="row"
               style={{

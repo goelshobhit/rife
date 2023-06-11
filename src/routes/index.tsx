@@ -113,8 +113,10 @@ export default function Router() {
           children: [
             { path: '/', element: <UsersList /> },
             { path: 'create', element: <UsersCreate /> },
+            { path: 'edit/:id', element: <UsersUpdate /> },
             { path: 'admin', element: <UsersAdminList /> },
             { path: 'admin/create', element: <AdminUsersCreate /> },
+            { path: 'admin/edit/:id', element: <AdminUsersUpdate /> },
             { path: 'invited', element: <UsersInvitedList /> }
           ]
         },
@@ -130,6 +132,13 @@ export default function Router() {
             { path: 'engineRewards', element: <RewardEngineRewardsList /> },
             { path: 'engineRequests', element: <RewardEngineRequestList /> },
             { path: 'center/:id', element: <RewardDetail /> }
+          ]
+        },
+        {
+          path: 'user',
+          children: [
+            { path: 'profile', element: <UserAccount /> },
+            { path: 'account', element: <UserSetting /> }
           ]
         }
       ]
@@ -204,8 +213,10 @@ const BrandUpdate = Loadable(lazy(() => import('../pages/dashboard/brand/brand_u
 const BrandUserList = Loadable(lazy(() => import('../pages/dashboard/brand/brand_user_list')));
 const UsersList = Loadable(lazy(() => import('../pages/dashboard/user/users_list')));
 const UsersCreate = Loadable(lazy(() => import('../pages/dashboard/user/users_create')));
+const UsersUpdate = Loadable(lazy(() => import('../pages/dashboard/user/user_update')));
 const UsersAdminList = Loadable(lazy(() => import('../pages/dashboard/user/users_admin_list')));
 const AdminUsersCreate = Loadable(lazy(() => import('../pages/dashboard/user/user_admin_create')));
+const AdminUsersUpdate = Loadable(lazy(() => import('../pages/dashboard/user/user_admin_update')));
 const UsersInvitedList = Loadable(lazy(() => import('../pages/dashboard/user/users_invited_list')));
 const RewardList = Loadable(lazy(() => import('../pages/dashboard/reward/reward_list')));
 const RewardDetail = Loadable(lazy(() => import('../pages/dashboard/reward/reward_detail_page')));
@@ -228,3 +239,5 @@ const RewardEngineRewardsList = Loadable(
 const RewardEngineRequestList = Loadable(
   lazy(() => import('../pages/dashboard/reward/reward_engine_request_list'))
 );
+const UserAccount = Loadable(lazy(() => import('../pages/dashboard/user/user_profile')));
+const UserSetting = Loadable(lazy(() => import('../pages/dashboard/user/user_settings')));
