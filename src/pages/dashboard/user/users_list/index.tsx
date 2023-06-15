@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { styled } from '@material-ui/core/styles';
 import get from 'lodash/get';
 import moment from 'moment';
 // material
-import { Typography, Box, Pagination, Button, Grid, Skeleton, Link } from '@material-ui/core';
+import {
+  Typography,
+  Box,
+  Pagination,
+  Button,
+  Grid,
+  Skeleton,
+  Badge,
+  DialogActions
+} from '@material-ui/core';
 
 import { DataGrid, GridColDef, GridToolbar } from '@material-ui/data-grid';
-// utils
-
-// lodash
-
 // redux
 import { useDispatch, useSelector } from '../../../../redux/store';
 import { getUsersList } from '../../../../redux/slices/usersList';
@@ -38,12 +43,14 @@ const BrandRowWrapper = styled('div')(() => ({
 
 export default function UsersList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loading, usersList } = useSelector((state: { users: usersState }) => state.users);
   const [page, setPageNo] = useState(1);
 
   useEffect(() => {
     dispatch(getUsersList({ bonusPageNo: page }));
-  }, [dispatch, page]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const SkeletonLoad = () => (
     <Grid container spacing={3} sx={{ mt: 2 }}>
@@ -62,7 +69,7 @@ export default function UsersList() {
   const mapDataToTargetStructure = (rows: any) =>
     rows.map((row: any) => ({
       id: row.u_id,
-      userName: get(row, 'user_profile.u_f_name', '-') + get(row, 'user_profile.u_l_name', ''),
+      userName: get(row, 'u_login', '-'),
       u_email: get(row, 'u_email', '-'),
       u_active: row.u_active ? 'True' : 'False',
       facebookId: get(row, 'u_fb_username', '-'),
@@ -83,52 +90,40 @@ export default function UsersList() {
     {
       field: 'userName',
       headerName: 'User Name',
-      width: 300,
-      renderCell: (params: any) => (
-        <Link
-          to={`/user/${params.row.id}`}
-          key={params.row.id}
-          variant="body2"
-          component={RouterLink}
-        >
-          <TextCellWrapperLink variant="subtitle1">{params.row.userName}</TextCellWrapperLink>
-        </Link>
-      )
+      width: 300
     },
     {
       field: 'u_email',
       headerName: 'Email',
-      width: 200
+      width: 300
     },
     {
       field: 'u_active',
-      headerName: 'Active',
-      width: 200
-    },
-    {
-      field: 'emailVerified',
-      headerName: 'Is Email Verified ?',
-      width: 200
-    },
-    {
-      field: 'is_user_deactivated',
-      headerName: 'Is Deactivated ?',
-      width: 200
-    },
-    {
-      field: 'is_user_hidden',
-      headerName: 'Is Hidden ?',
-      width: 200
-    },
-    {
-      field: 'gender',
-      headerName: 'Gender',
-      width: 200
+      headerName: 'Active / Inactive',
+      width: 200,
+      renderCell: (params: any) => (
+        <Badge>{params.row.u_active == 'True' ? 'Active' : 'Inactive'}</Badge>
+      )
     },
     {
       field: 'createdAt',
       headerName: 'Created At',
       width: 200
+    },
+    {
+      field: 'action',
+      headerName: 'Action',
+      width: 300,
+      renderCell: (params: any) => (
+        <DialogActions>
+          <Button
+            variant="contained"
+            onClick={() => navigate(`/dashboard/usersList/edit/${params.row.id}`)}
+          >
+            Edit
+          </Button>
+        </DialogActions>
+      )
     }
   ];
 
@@ -159,7 +154,12 @@ export default function UsersList() {
             </motion.span>
           ))}
         </MotionContainer>
-        <Button variant="contained" color="primary" className="button">
+        <Button
+          variant="contained"
+          color="primary"
+          className="button"
+          onClick={() => navigate('/dashboard/usersList/create')}
+        >
           {' '}
           + Add New User
         </Button>

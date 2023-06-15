@@ -61,15 +61,12 @@ export default function BonusRuleList() {
 
   const mapDataToTargetStructure = (rows: any) =>
     rows.map((row: any) => ({
-      id: row.bonus_ticket_rules_id,
-      bonus_item_brand_id: row.bonus_ticket_rules_id,
-      bonus_item_name: row.bonus_ticket_rule_name,
-      bonusTicketWorks: 0,
-      bonusTicketCashOutRules: 0,
-      createdAt: moment(row.bonus_ticket_rules_created_at).format('MMM DD, YYYY'),
-      updatedAt: moment(row.bonus_ticket_rules_created_at).format('MMM DD, YYYY'),
-      Status: isEmpty(row.bonus_ticket_rule_details) ? 1 : 0,
-      brand: '-'
+      id: row?.bonus_tickets_rules_id,
+      bonus_item_name: row?.['bonus_ticket_rule.Bonus Ticket Rule Name'],
+      bonusTicketWorks: row?.bonus_tickets_how_it_works,
+      bonusTicketCashOutRules: row?.bonus_tickets_cashout_rules,
+      createdAt: moment(row?.bonus_tickets_rules_created_at).format('MMM DD, YYYY'),
+      updatedAt: moment(row?.bonus_tickets_rules_updated_at).format('MMM DD, YYYY')
     }));
 
   const columns: GridColDef[] = [
@@ -81,35 +78,35 @@ export default function BonusRuleList() {
       headerName: 'Bonus Ticket Rule Name',
       width: 300,
       renderCell: (params: any) => (
-        <Link
-          to={`/brand/${params.row.id}`}
-          key={params.row.id}
-          variant="body2"
-          component={RouterLink}
-        >
-          <TextCellWrapperLink variant="subtitle1">
-            {get(params, 'row.bonus_item_name', '-')}
-          </TextCellWrapperLink>
-        </Link>
+        <TextCellWrapperLink variant="subtitle1">
+          {get(params, 'row.bonus_item_name', '-')}
+        </TextCellWrapperLink>
       )
     },
     {
-      field: 'brand',
-      headerName: 'Brand',
-      width: 300
-    },
-    {
-      field: 'Status',
-      headerName: 'Status',
+      field: 'bonusTicketWorks',
+      headerName: 'Bonus Ticket Works',
       width: 300,
-      renderCell: (params) => (
-        <Label
-          color={renderColorStatusCode(params.row.Status)}
-          sx={{ textTransform: 'capitalize', mx: 'auto' }}
-        >
-          {params.row.Status === 0 ? 'Active' : 'Inactive'}
-        </Label>
-      )
+      renderCell: (params: { row: any }) => {
+        const data: string = params.row.bonusTicketWorks ? params.row.bonusTicketWorks : '';
+        return <p dangerouslySetInnerHTML={{ __html: data }} />;
+      }
+    },
+    {
+      field: 'bonusTicketCashOutRules',
+      headerName: 'Bonus Ticket Cashout Rules',
+      width: 300,
+      renderCell: (params: { row: any }) => {
+        const data: string = params.row.bonusTicketCashOutRules
+          ? params.row.bonusTicketCashOutRules
+          : '';
+        return <p dangerouslySetInnerHTML={{ __html: data }} />;
+      }
+    },
+    {
+      field: 'createdAt',
+      headerName: 'Created At',
+      width: 300
     }
   ];
 
