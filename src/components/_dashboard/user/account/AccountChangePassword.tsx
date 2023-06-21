@@ -2,12 +2,16 @@ import * as Yup from 'yup';
 import { useSnackbar } from 'notistack5';
 import { useFormik, Form, FormikProvider } from 'formik';
 // material
-import { Stack, Card, TextField } from '@material-ui/core';
+import { Stack, Card, TextField, styled, Typography } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
 // utils
-import fakeRequest from '../../../../utils/fakeRequest';
+import { changePassword } from '../../../../redux/slices/user';
 
 // ----------------------------------------------------------------------
+
+const HeadingStyle = styled(Typography)(() => ({
+  paddingBottom: 14
+}));
 
 export default function AccountChangePassword() {
   const { enqueueSnackbar } = useSnackbar();
@@ -27,11 +31,21 @@ export default function AccountChangePassword() {
       confirmNewPassword: ''
     },
     validationSchema: ChangePassWordSchema,
-    onSubmit: async (values, { setSubmitting }) => {
-      await fakeRequest(500);
-      setSubmitting(false);
-      alert(JSON.stringify(values, null, 2));
-      enqueueSnackbar('Save success', { variant: 'success' });
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      try {
+        const payload = {
+          current_password: values?.oldPassword,
+          new_password: values?.newPassword,
+          confirm_password: values?.confirmNewPassword
+        };
+        changePassword(payload);
+        resetForm();
+        setSubmitting(false);
+        enqueueSnackbar('Password Changed Successfully', { variant: 'success' });
+      } catch (error) {
+        console.error(error);
+        setSubmitting(false);
+      }
     }
   });
 
@@ -41,6 +55,9 @@ export default function AccountChangePassword() {
     <Card sx={{ p: 3 }}>
       <FormikProvider value={formik}>
         <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+          <HeadingStyle gutterBottom variant="h4">
+            Change Password
+          </HeadingStyle>
           <Stack spacing={3} alignItems="flex-end">
             <TextField
               {...getFieldProps('oldPassword')}
