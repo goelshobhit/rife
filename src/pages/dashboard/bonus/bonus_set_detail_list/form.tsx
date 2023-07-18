@@ -131,7 +131,7 @@ export default function RewardNewForm({ rewardBrandList, bonusRuleList }: Props)
                 >
                   {map(bonusRuleList, (item: any) => (
                     <MenuItem value={item.bonus_ticket_rules_id} key={item.bonus_ticket_rules_id}>
-                      {item.bonus_ticket_rule_name}
+                      {item['bonus_ticket_rule.Bonus Ticket Rule Name']}
                     </MenuItem>
                   ))}
                 </TextField>

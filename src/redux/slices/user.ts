@@ -50,7 +50,7 @@ const initialState: UserState = {
   addressBook: [],
   invoices: [],
   notifications: null,
-  totalUsersCount: 0,
+  totalUsersCount: 0
 };
 
 const slice = createSlice({
@@ -314,6 +314,16 @@ export function getUsers() {
     try {
       const response = await axios.get('/api/user/all');
       dispatch(slice.actions.getUsersSuccess(response.data.users));
+    } catch (error) {
+      dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+export function changePassword(params: any) {
+  return async () => {
+    try {
+      await axios.post(`users/changepassword`, { ...params });
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
