@@ -7,7 +7,12 @@ steps:
   - name: "node"
     entrypoint: "yarn"
     args: ["build"] #building the react app
-    env: ["NODE_PATH=./src", "GENERATE_SOURCEMAP=true"]
+    env:
+      [
+        "NODE_PATH=./src",
+        "GENERATE_SOURCEMAP=true",
+        "NODE_OPTIONS=--openssl-legacy-provider",
+      ]
 
   - name: gcr.io/cloud-builders/gsutil
     args: ["-m", "rsync", "-r", "build", "gs://social_app_v2_dev/"] # syncing the latest build with storage bucket
@@ -28,11 +33,10 @@ steps:
   - name: gcr.io/cloud-builders/gsutil
     args:
       [
-        'setmeta',
-        '-h',
-        'Cache-Control:no-cache',
-        'gs://social_app_v2_dev/index.html',
+        "setmeta",
+        "-h",
+        "Cache-Control:no-cache",
+        "gs://social_app_v2_dev/index.html",
       ]
 
 timeout: "600s"
-
