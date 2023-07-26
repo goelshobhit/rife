@@ -3,8 +3,7 @@ import axios from 'axios';
 // ----------------------------------------------------------------------
 
 const axiosInstance = axios.create({
-  // baseURL: 'https://social-app-development-347u5kv2kq-uc.a.run.app/api/',
-  baseURL: 'http://localhost:3015/api/',
+  baseURL: 'https://social-app-development-347u5kv2kq-uc.a.run.app/api/',
   responseType: 'json'
 });
 

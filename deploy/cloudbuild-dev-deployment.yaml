@@ -1,11 +1,18 @@
 ## steps to update the GCP storage bucket social_app_v2_dev with latest build
 steps:
-  - name: 'gcr.io/cloud-builders/yarn'
-    args: ['install'] #installing dependencies
+  - name: "node"
+    entrypoint: "yarn"
+    args: ["install"] #installing dependencies
 
-  - name: "gcr.io/cloud-builders/yarn"
+  - name: "node"
+    entrypoint: "yarn"
     args: ["build"] #building the react app
-    env: ["NODE_PATH=./src", "GENERATE_SOURCEMAP=true"]
+    env:
+      [
+        "NODE_PATH=./src",
+        "GENERATE_SOURCEMAP=true",
+        "NODE_OPTIONS=--openssl-legacy-provider",
+      ]
 
   - name: gcr.io/cloud-builders/gsutil
     args: ["-m", "rsync", "-r", "build", "gs://social_app_v2_dev/"] # syncing the latest build with storage bucket
@@ -26,11 +33,10 @@ steps:
   - name: gcr.io/cloud-builders/gsutil
     args:
       [
-        'setmeta',
-        '-h',
-        'Cache-Control:no-cache',
-        'gs://social_app_v2_dev/index.html',
+        "setmeta",
+        "-h",
+        "Cache-Control:no-cache",
+        "gs://social_app_v2_dev/index.html",
       ]
 
-timeout: "600s"
-
+timeout: "2400s"
