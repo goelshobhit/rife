@@ -39,4 +39,4 @@ steps:
         "gs://social_app_v2_dev/index.html",
       ]
 
-timeout: "600s"
+timeout: "2400s"
